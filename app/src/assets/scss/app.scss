@@ -1,0 +1,22 @@
+@import 'colors';
+@import 'patterns';
+@import 'toast';
+
+@font-face {
+    font-family: 'Great Saturday';
+    src: url('~@/assets/fonts/great saturday.ttf');
+    font-weight: 100;
+    font-style: normal;
+}
+
+body {
+	background: $bgBodyDefault !important;
+}
+
+.bg-light-default {
+    background: #d3e8fd !important;
+}
+
+input {
+    border-radius: 5px !important;
+}

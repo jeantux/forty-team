@@ -1,0 +1,20 @@
+@import 'colors';
+
+@mixin toastedToasted {
+    border-radius: 2px;
+}
+
+.toasted.toasted-primary.error {	
+	@include toastedToasted();
+	background: $redDefault;
+	border: $redDefault 1px solid;
+	color: #fff;
+	font-weight: 500;
+}
+.toasted.toasted-primary.success {
+	@include toastedToasted();
+	background: $blueDefault;
+	border: $blueDefault 1px solid;
+	color: #fff;
+	font-weight: 500;
+}

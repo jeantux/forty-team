@@ -1,0 +1,76 @@
+<div class="home">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+    <div id="frame">
+      <div id="sidepanel">
+        <div id="profile">
+          <div class="wrap">
+            <img id="profile-img" :src="profile.img === undefined ? 'images/icon-user-default.png' : profile.img" :class="profile.status" alt="" />
+            <p>{{profile.name}}</p>
+          </div>
+        </div>
+        <div id="search">
+          <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+          <input type="text" placeholder="Buscar contatos..." />
+        </div>
+        <div id="contacts">
+          <ul>
+            <li v-for="contact in contacts" :key="contact.name" class="contact">
+              <div class="wrap" v-on:click="changeTalk(contact)">
+                <span
+                  class="contact-status"
+                  :class="{'notification' : contact.notification}"
+                >
+                </span>
+                <img :src="contact.picture" />
+                <div class="meta">
+                  <p class="name">{{contact.name}}</p>
+                  <p class="preview">{{contact.description}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="bottom-bar">
+          <button id="addcontact" v-on:click="goToPage('search')">
+            <i class="fa fa-users fa-fw" aria-hidden="true"></i>
+            <span>Pesquisar contatos</span>
+          </button>
+          <button v-on:click="goToPage('config')">
+            <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
+            <span>Configurações</span>
+          </button>
+        </div>
+      </div>
+      <div class="content">
+        <div class="contact-profile">
+          <img :src="currentState.contact.picture" alt="" />
+          <p class="contact-name">{{currentState.contact.name}}</p>
+          <p v-if="currentState.contact.typing" class="typing"> ( Digitando ... )</p>
+          <div class="text-right mr-4"><a href="#" @click="signOut()" class="text-black">Sair</a></div>
+        </div>
+        <div class="messages">
+          <ul>
+            <li v-for="talk in this.currentState.contact.talks" :key="talk.id" :class="talk.method">
+              
+              <img v-if="talk.method === 'sent'"    :src="profile.img === undefined ? 'images/icon-user-default.png' : profile.img" alt="">
+              <img v-if="talk.method === 'replies'" :src="currentState.contact.picture" alt="">
+              <p> {{talk.message}} </p>
+            </li>
+          </ul>
+        </div>
+        <div class="message-input" v-if="Object.keys(currentState.contact).length > 0">
+          <div class="wrap">
+            <textarea
+              cols="1"
+              v-on:keyup.enter="newMessage()"
+              placeholder="Digite sua mensagem..."
+              v-model="currentState.message"
+              @keypress="sendTyping()"
+            >
+            </textarea>
+            <button v-on:click="newMessage()" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

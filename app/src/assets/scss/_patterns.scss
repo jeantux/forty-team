@@ -1,0 +1,5 @@
+@mixin defineBackground($colorBg, $colorFont) {
+  background: $colorBg !important; 
+  color: $colorFont !important;
+}
+
