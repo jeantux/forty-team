@@ -1,3 +1,4 @@
+import configConnection from '../../../connections/config-pg'
 const { Client } = require('pg')
 
 function Messages(id, idUser) {
@@ -7,14 +8,7 @@ function Messages(id, idUser) {
     let id = this.id
     return new Promise(async (resolve, reject) => {
     
-      const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'fcdb',
-        password: 'mainroot',
-        port: 5432,
-      })
-
+      const client = new Client(configConnection)
       await client.connect()
 
       let sqlQry = ` select m.message_id,
@@ -37,7 +31,7 @@ function Messages(id, idUser) {
         let talks = []
         let tmpTalks = res.rows
 
-        tmpTalks.sort(function(a,b) {
+        tmpTalks.sort(function(a, b) {
             return a.message_id < b.message_id ? -1 : a.message_id > b.message_id ? 1 : 0;
         });
 

@@ -1,3 +1,4 @@
+import configConnection from '../../../connections/config-pg'
 const { Client } = require('pg')
 
 function Contact(id) {
@@ -6,13 +7,7 @@ function Contact(id) {
     let id = this.id
     return new Promise(async (resolve, reject) => {
     
-      const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'fcdb',
-        password: 'mainroot',
-        port: 5432,
-      })
+      const client = new Client(configConnection)
 
       await client.connect()
 

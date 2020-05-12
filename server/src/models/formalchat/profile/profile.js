@@ -1,5 +1,5 @@
-const { Client } = require('pg')
 import configConnection from '../../../connections/config-pg'
+const { Client } = require('pg')
 
 function Profile(id) {
   this.id          = id === undefined ? -1 : id

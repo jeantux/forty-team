@@ -1,6 +1,6 @@
+import configConnection from '../../../connections/config-pg'
 const crypt = require('../../../methods/crypt.js')
 const { Client } = require('pg')
-
 
 function Auth() {
   function selectUser(userId, username, password){
@@ -8,13 +8,7 @@ function Auth() {
       let whereDefault = ''
       const newPassword = password !== undefined ? crypt.cryptPass(password) : ''
 
-      const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'fcdb',
-        password: 'mainroot',
-        port: 5432,
-      })
+      const client = new Client(configConnection)
 
       if (userId === 0) {
         whereDefault = `  and upper(u.username) = upper('${username}')

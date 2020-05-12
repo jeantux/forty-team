@@ -14,7 +14,6 @@ function SearchUsers(id, textSearch) {
       const client = new Client(configConnection)
       await client.connect()
 
-      // if private accout
       let where = ` and (
                          upper(p.full_name) like upper('%${textSearch}%')
                       or upper(a.username) like upper('%${textSearch}%')
@@ -22,7 +21,7 @@ function SearchUsers(id, textSearch) {
                   `
       let sqlQry = `  select p.full_name as name
                             ,p.description
-                            ,p.image 
+                            ,p.image
                             ,not c.user_id is null as mycontact
                         from account       a
                       inner join profile  p on p.profile_id = a.profile_id

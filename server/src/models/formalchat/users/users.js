@@ -1,7 +1,7 @@
-const { Client } = require('pg')
-const crypt = require('../../../methods/crypt.js')
 import configConnection from '../../../connections/config-pg'
 import Profile from '../profile/profile'
+const { Client } = require('pg')
+const crypt = require('../../../methods/crypt.js')
 
 function Users() {
   this.user_id = 0
@@ -44,7 +44,6 @@ function Users() {
         this.last_login = user.last_login
 
         resolve()
-
         client.end()
       })
     })
