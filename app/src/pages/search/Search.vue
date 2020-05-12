@@ -20,18 +20,18 @@
 
     <div class="container-fluid gedf-wrapper">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col">
                 <div class="card gedf-card" v-for="user in users" :key="user.name">
                     <div class="card-header bg-ligth-card">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="mr-2">
-                                    <img class="rounded-circle" width="45" :src="user.image" alt="">
+                                    <img class="rounded-circle" width="45" :src="user.image ? user.image : 'images/icon-user-default.png'" alt="">
                                 </div>
                                 <div class="ml-2">
                                     <div class="h5 m-0">{{ user.name }}</div>
                                     <div class="h7 text-muted mb-2">{{ user.description }}</div>
-                                    <div class="tag-friends text-center">Amigos</div>
+                                    <div :class="{'tag-friends': user.mycontact}" class="text-center">Amigos</div>
                                 </div>
                             </div>
                             <div>
@@ -47,40 +47,6 @@
                             Extremamente leve e robusto, proporciona comodidade no transporte e estabilidade na hora do disparo da fotografia. O equipamento possui travas de elevação e de inclinação vertical, pernas retráteis com ajuste em 4 alturas e haste central com encaixe retrátil na base.
                             O tripé vem acompanhado de um adaptador para smartphone, que permitirá a gravação de momentos incríveis e com muita mobilidade.
                         </p>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="col-md-3" v-show="false">
-                <div class="card gedf-card">
-                    <div class="card-body lign-items-center">
-                        <div class="card-body d-flex justify-content-between lign-items-center">
-                            <div class="">
-                                <img class="rounded-circle" width="45" src="images/icon-user-default.png" alt="">
-                            </div>
-                            <h5 class="card-title">Empresa teste</h5>
-                        </div>
-                        
-                        <h6 class="card-subtitle mb-2 text-muted"></h6>
-                        <p class="card-text">A melhores esfirras, entregamos em sua casa.</p>
-                        <a href="#" class="card-link">Perfil</a>
-                        <a href="#" class="card-link">Conversar</a>
-                    </div>
-                </div>
-
-                <div class="card gedf-card">
-                    <div class="card-body lign-items-center">
-                        <div class="card-body d-flex justify-content-between lign-items-center">
-                            <div class="">
-                                <img class="rounded-circle-prop" width="45" src="images/icon-user-default.png" alt="">
-                            </div>
-                            <h5 class="card-title">Segunda empresa</h5>
-                        </div>
-                        
-                        <h6 class="card-subtitle mb-2 text-muted"></h6>
-                        <p class="card-text">A melhores esfirras, entregamos em sua casa.</p>
-                        <a href="#" class="card-link">Perfil</a>
-                        <a href="#" class="card-link">Conversar</a>
                     </div>
                 </div>
             </div>
@@ -156,11 +122,11 @@ button {border-radius: 5px; background-color: #3f5fc7;}
 .card-link-active:hover { background: #2b4e8f; color: #fff; text-decoration: none;}
 .card-link:hover { background: #3f5fc7; color: white;}
 .tag-friends {
-    background: #3f5fc7;
+    background: #4d5264;
     color: #ffffff;
     border-radius: 5px;
-    width: 50px;
-    font-size: 12px;
+    width: 40px;
+    font-size: 10px;
     float: right;
     position: absolute;
     margin-top: -10px;
