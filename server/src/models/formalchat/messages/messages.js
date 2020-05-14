@@ -54,13 +54,7 @@ function Messages(id, idUser) {
   this.sendMessage = (message) => {
     return new Promise(async (resolve, reject) => {
     
-      const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'fcdb',
-        password: 'mainroot',
-        port: 5432,
-      })
+      const client = new Client(configConnection)
 
       await client.connect()
 
