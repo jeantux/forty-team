@@ -1,4 +1,5 @@
-# Fort Team
+<img src="https://github.com/jeaanca/fort-team/blob/master/app/src/assets/img/logo-full.png"><br>
+
 ### Fort Team is a real-time conversation project
 
 ## About
