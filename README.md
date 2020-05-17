@@ -14,14 +14,14 @@ The project organization is based on the MVC model.
 The data is stored in a **postgres** database and the entire cache is made by **redis**, in redis the database user Id is linked to the socket id.
 
 ## Configuration 
-**server**
-  Add postgres configuration data to server /src/connections/config-pg.js
+### server
+  Add postgres configuration data to server <i>/src/connections/config-pg.js</i>
 
-  npm install
+  npm install <br>
   npm start
 
-**app**
-  npm install
+### app
+  npm install <br>
   npm run serve
 
 
