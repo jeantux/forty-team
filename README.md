@@ -14,6 +14,10 @@ The project organization is based on the MVC model.
 
 The data is stored in a **postgres** database and the entire cache is made by **redis**, in redis the database user Id is linked to the socket id.
 
+## Clone
+Clone this repo to your local machine using https://github.com/jeaanca/forty-team <br>
+cd forty-team <br>
+
 ## Configuration 
 ### server
   Add postgres configuration data to server <i>/src/connections/config-pg.js</i>
@@ -21,7 +25,11 @@ The data is stored in a **postgres** database and the entire cache is made by **
   npm install <br>
   npm start
 
-### app
+### app  
+  cp .env.example .env <br>
+  In the .env file add the key that will be used in the JWT.
+  
+
   npm install <br>
   npm run serve
 
