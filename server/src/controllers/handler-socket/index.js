@@ -1,7 +1,9 @@
 import JWT from 'jsonwebtoken'
 import Messages from "../../models/formalchat/messages/messages"
-const SECRET = 'AJHDD561SD1F59F189S'
+require("dotenv-safe").config();
 const redis = require("redis");
+
+const SECRET = process.env.KEY_SECRET
 
 function validToken (authorization, call) {
     const token = authorization ? authorization.split(' ')[1] : null
