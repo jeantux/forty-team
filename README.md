@@ -1,5 +1,6 @@
-# Fort Team
-### Fort Team is a real-time conversation project
+<img src="https://github.com/jeaanca/fort-team/blob/master/app/src/assets/img/logo-full.png"><br>
+
+### Forty Team is a real-time conversation project
 
 ## About
 This project has the ambition to build a chat in real time using socket.io in javascript.
