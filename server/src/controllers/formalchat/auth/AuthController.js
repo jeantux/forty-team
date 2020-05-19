@@ -1,7 +1,8 @@
 import JWT from 'jsonwebtoken'
 import Auth from '../../../models/formalchat/auth/auth'
+require("dotenv-safe").config();
 
-const SECRET = 'AJHDD561SD1F59F189S'
+const SECRET = process.env.KEY_SECRET
 
 export default {
   authenticate (req, res) {
