@@ -13,8 +13,10 @@ export default {
     return {
       currentState: {
         message: '',
-        contact: {}
+        contact: {},
+        searchContacts: ''
       },
+      allContacts: [],
       contacts: [],
       profile: {},
       socket: io('localhost:3000')
@@ -31,6 +33,19 @@ export default {
     signOut () {
       this.ActionSignOut()
       this.$router.push({ name: 'login' })
+    },
+    searchInContacs(){
+      this.contacts = []
+      for (const index in this.allContacts) {        
+          const contact = this.allContacts[index]
+          if (contact.name.toLowerCase().indexOf(this.currentState.searchContacts.toLowerCase()) !== -1) {
+            this.contacts.push(contact)
+          }
+      }
+      // this.contacts
+    },
+    loadAllContacts() {
+      this.contacts = this.allContacts
     },
     goToPage(pageName) {
         this.$router.push({ name: pageName })
@@ -76,7 +91,6 @@ export default {
               setTimeout(() => { this.currentState.contact.typing = false }, 3000)
             }
         }
-        window.console.log(this.currentState.contact.typing)
       })
 
       this.socket.on('connect', () => {
@@ -91,7 +105,6 @@ export default {
       this.socket.emit('authenticate', dataAuth);
     },
 		changeTalk(contact) {
-      window.console.log(contact)
       if (!contact.talks.length) {
         this.getMessages(contact)
       }
@@ -102,7 +115,6 @@ export default {
 		getDataProfile() {
       servicesPages.pages.profile()
 			.then(res => {
-        window.console.log(res.data)
         this.profile = res.data.profile
 			})
 			.catch(err => {
@@ -113,7 +125,8 @@ export default {
 			this.contacts = []
       servicesPages.pages.contactslist()
 			.then(res => {
-				this.contacts = res.data.contacts
+        this.allContacts = res.data.contacts
+        this.loadAllContacts()
 			})
 			.catch(err => {
 				console.log(err)

@@ -10,7 +10,12 @@
         </div>
         <div id="search">
           <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input type="text" placeholder="Buscar contatos..." />
+          <input
+            v-model="currentState.searchContacts"
+            type="text"
+            placeholder="Buscar contatos..."
+            v-on:keyup="searchInContacs()"
+          />
         </div>
         <div id="contacts">
           <ul>
