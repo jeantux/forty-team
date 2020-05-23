@@ -33,6 +33,10 @@ cd forty-team <br>
   npm install <br>
   npm run serve
 
+## Contributors
+
+| [<img src="https://avatars0.githubusercontent.com/u/38164565?s=400&u=d4fb65931ff45a914df31ca97e017bbd7f6bb04d&v=4" width="110"><br><sub>@oLucasPopov</sub>](https://github.com/oLucasPopov) 
+|:---: |
 
 ## Autor
 | [<img src="https://avatars3.githubusercontent.com/u/30236552?v=4" width="110"><br><sub>@JeaanCa</sub>](https://github.com/jeaanca) |
