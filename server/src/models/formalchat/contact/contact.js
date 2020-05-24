@@ -17,8 +17,8 @@ function Contact(id) {
                 p.description,
                 p.image
             from contacts c
-            inner join account a on a.user_id = c.contact_id
-            inner join profile  p on p.profile_id = a.profile_id
+            inner join accounts a on a.user_id = c.contact_id
+            inner join profiles  p on p.profile_id = a.profile_id
             where c.user_id = ${id}
       `
       client.query(sqlQry, (err, res) => {

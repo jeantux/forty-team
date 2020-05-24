@@ -4,7 +4,8 @@ export default { pages:
       contactslist: { method: 'get', url: 'contactslist' },
       messages: { method: 'get', url: 'messages' },
       sendmessage: { method: 'post', url: 'sendmessage' },
-      searchUsers: { method: 'get', url: 'search-users' }
+      searchUsers: { method: 'get', url: 'search-users' },
+      invitations: { method: 'get', url: 'invitations' },
     }
   }
   

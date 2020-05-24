@@ -659,3 +659,26 @@ body {
   }
 
   .typing {color: green; font-weight: bold; margin-left: 4px; font-size: small;}
+
+  .invitation {
+    width: 100%;
+    height: 100px;
+    background: #1d6cb1;
+    text-align: center;
+  }
+
+  .invitation button {
+    width: 100px;
+    height: 30px;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    display: inline;
+    margin-left: 5px;
+  }
+  .invitation h2 {color: #fff;}
+  .invitation button:hover {
+    background: white;
+    color: black;
+  }
+  .invitation .reject:hover{background: rgb(243, 180, 180);}
+  .invitation .accept:hover{background: rgb(138, 238, 205);}

@@ -1,5 +1,7 @@
 import JWT from 'jsonwebtoken'
 import Messages from "../../models/formalchat/messages/messages"
+import Profile from '../../models/formalchat/profile/profile.js'
+import Invitations from '../../models/formalchat/invitations/invitations.js'
 require("dotenv-safe").config();
 const redis = require("redis");
 
@@ -21,9 +23,11 @@ function validToken (authorization, call) {
     })
 }
 
-function registerMessageDatabase(user_id, id_contact, message) {
-    const messages = new Messages(id_contact, user_id)
-    messages.sendMessage(message)    
+function registerMessageDatabase(user_id, data) {
+    if (data.actionType === 'message') {
+        const messages = new Messages(data.id_contact, user_id)
+        messages.sendMessage(data.message)    
+    }
 }
 
 function registerUserId(user_id, socket_id) {
@@ -53,19 +57,39 @@ function getSocketId(user_id) {
     })
 }
 
-async function sendMessage(user_id, contact_id, message, socket, actionType) {    
-    getSocketId(contact_id)
+async function sendMessage(user_id, data, socket) {   
+    getSocketId(data.id_contact)
         .then(socket_id => {
             if (socket_id) {
-                if (actionType === 'message')
-                    socket.broadcast.to(socket_id).emit('messages', { id_contact: user_id, message })
+                if (data.actionType === 'message')
+                    socket.broadcast.to(socket_id).emit('messages', { id_contact: user_id, message: data.message })
 
-                else if (actionType === 'typing') {
+                else if (data.actionType === 'typing') {
                     socket.broadcast.to(socket_id).emit('typing', { id_contact: user_id, typing: true })
+                }
+                else if (data.actionType === 'adduser') {
+                    const profileModel = new Profile(user_id)
+                    profileModel.getProfile()
+                        .then(currentProfile => {
+                            const dataReturn = {
+                                id_contact: user_id,
+                                name: currentProfile.full_name,
+                                picture: currentProfile.image
+                            }
+                            socket.broadcast.to(socket_id).emit('adduser', dataReturn)
+                        })
+                        sendInvite(user_id, data.id_contact)
                 }
             }
         })
         .catch(err => console.log(err))
+}
+
+function sendInvite(idUser, idFrom) {
+    const invite = new Invitations()
+    invite.id = idFrom
+    invite.contact_id = idUser
+    invite.register()
 }
 
 function handlerSocket(io) {
@@ -82,10 +106,9 @@ function handlerSocket(io) {
 
         socket.on('actionClient', data => {
             validToken(data.token, decoded => {
-                if (decoded) {
-                    if (data.actionType === 'message')
-                        registerMessageDatabase(decoded.user.user_id, data.id_contact, data.message)
-                    sendMessage(decoded.user.user_id, data.id_contact, data.message, socket, data.actionType)
+                if (decoded) {                    
+                    registerMessageDatabase(decoded.user.user_id, data)                        
+                    sendMessage(decoded.user.user_id, data, socket)
                 }
             })  
         })

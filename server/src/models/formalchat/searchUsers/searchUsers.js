@@ -19,12 +19,13 @@ function SearchUsers(id, textSearch) {
                       or upper(a.username) like upper('%${textSearch}%')
                         )
                   `
-      let sqlQry = `  select p.full_name as name
+      let sqlQry = `  select a.user_id   as id_contact
+                            ,p.full_name as name
                             ,p.description
                             ,p.image
                             ,not c.user_id is null as mycontact
-                        from account       a
-                      inner join profile  p on p.profile_id = a.profile_id
+                        from accounts       a
+                      inner join profiles  p on p.profile_id = a.profile_id
                         left join contacts c on c.user_id = ${id}
                                             and c.contact_id = a.user_id
                       where a.user_id <> ${id}

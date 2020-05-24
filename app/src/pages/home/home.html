@@ -4,8 +4,8 @@
       <div id="sidepanel">
         <div id="profile">
           <div class="wrap">
-            <img id="profile-img" :src="profile.img === undefined ? 'images/icon-user-default.png' : profile.img" :class="profile.status" alt="" />
-            <p>{{profile.name}}</p>
+            <img id="profile-img" :src="profile.img ? profile.img : imageDefaultUser" :class="profile.status" alt="" />
+            <p> {{ profile.name }} </p>
           </div>
         </div>
         <div id="search">
@@ -26,10 +26,10 @@
                   :class="{'notification' : contact.notification}"
                 >
                 </span>
-                <img :src="contact.picture" />
+                <img :src="contact.picture ? contact.picture : imageDefaultUser" />
                 <div class="meta">
-                  <p class="name">{{contact.name}}</p>
-                  <p class="preview">{{contact.description}}</p>
+                  <p class="name"> {{ contact.name }} </p>
+                  <p class="preview"> {{ contact.description }} </p>
                 </div>
               </div>
             </li>
@@ -48,18 +48,23 @@
       </div>
       <div class="content">
         <div class="contact-profile">
-          <img :src="currentState.contact.picture" alt="" />
-          <p class="contact-name">{{currentState.contact.name}}</p>
+          <img :src="currentState.contact.picture ? currentState.contact.picture : imageDefaultUser"z alt="" />
+          <p class="contact-name"> {{ currentState.contact.name }} </p>
           <p v-if="currentState.contact.typing" class="typing"> ( Digitando ... )</p>
           <div class="text-right mr-4"><a href="#" @click="signOut()" class="text-black">Sair</a></div>
         </div>
         <div class="messages">
+          <div v-if="currentState.contact.invitation" class="invitation">
+            <h2>Adicionar aos contatos</h2>
+            <button v-on:click="accept()" class="accept"> Sim </button>
+            <button v-on:click="reject()" class="reject"> Não </button>
+          </div>
           <ul>
             <li v-for="talk in this.currentState.contact.talks" :key="talk.id" :class="talk.method">
               
-              <img v-if="talk.method === 'sent'"    :src="profile.img === undefined ? 'images/icon-user-default.png' : profile.img" alt="">
+              <img v-if="talk.method === 'sent'"    :src="profile.img ? profile.img : imageDefaultUser" alt="">
               <img v-if="talk.method === 'replies'" :src="currentState.contact.picture" alt="">
-              <p> {{talk.message}} </p>
+              <p> {{ talk.message }} </p>
             </li>
           </ul>
         </div>

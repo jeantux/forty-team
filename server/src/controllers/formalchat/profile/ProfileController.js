@@ -12,7 +12,6 @@ export default {
             .catch(err => {
                 res.status(200).send( { message: 'Fail to get perfil data.' } )
             })
-
     }
 }
 

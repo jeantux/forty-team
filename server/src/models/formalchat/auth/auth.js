@@ -22,7 +22,7 @@ function Auth() {
                             ,u.username
                             ,u.email
                             ,u.last_login
-                       from account u
+                       from accounts u
                       where true
                             ${whereDefault}
                    `

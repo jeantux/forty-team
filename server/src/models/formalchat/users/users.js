@@ -25,7 +25,7 @@ function Users() {
                             a.email,
                             a.created_on,
                             a.last_login
-                       from account a
+                       from accounts a
                       where a.user_id = ${id}
                    `
       client.query(sqlQry, (err, res) => {
@@ -56,7 +56,7 @@ function Users() {
       await client.connect()
 
       let sqlQry = ` select a.user_id
-                       from account a
+                       from accounts a
                       where upper(a.username) = upper('${username}')
                    `
       client.query(sqlQry, (err, res) => {
@@ -97,7 +97,7 @@ function Users() {
         const profile_id = await profile.register()
         const passCrypted = crypt.cryptPass(this.password)
     
-        let sqlQry = ` INSERT INTO account (username, "password", email, profile_id)
+        let sqlQry = ` INSERT INTO accounts (username, "password", email, profile_id)
                                    VALUES  ('${this.username}', '${passCrypted}', '${this.email}', ${profile_id})
                      `
         const client = new Client(configConnection)

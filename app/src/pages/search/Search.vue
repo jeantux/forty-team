@@ -31,12 +31,13 @@
                                 <div class="ml-2">
                                     <div class="h5 m-0">{{ user.name }}</div>
                                     <div class="h7 text-muted mb-2">{{ user.description }}</div>
-                                    <div :class="{'tag-friends': user.mycontact}" class="text-center">Amigos</div>
+                                    <div v-show="user.mycontact" class="tag-friends text-center">Amigos</div>
                                 </div>
                             </div>
                             <div>
                                 <div class="dropdown">
-                                    <a v-on:click="sendMessage(user)" class="card-link-active text-white"><i class="fa fa-paper-plane"></i></a>
+                                    <a v-show="user.mycontact" v-on:click="sendMessage(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-paper-plane"></i></a>
+                                    <a v-show="!user.mycontact" v-on:click="addUser(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-user-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -58,23 +59,45 @@
 <script>
 import { servicesPages } from '@/http'
 import { mapActions } from 'vuex'
+import * as storage from '@/modules/auth/storage'
+import io from 'socket.io-client'
 
 export default {
     name: 'Search',
     data () {
         return {
             textSearch: '',
-            users: {}
+            users: {},
+            socket: io(process.env.VUE_APP_ROOT_API)
         }
     },
     created () {
+        this.authenticateUser()
         this.searchUser()
     },
     methods: {
     ...mapActions('auth', ['ActionSignOut']),
         signOut () {
-        this.ActionSignOut()
-        this.$router.push({ name: 'login' })
+            this.ActionSignOut()
+            this.$router.push({ name: 'login' })
+        },
+        authenticateUser() {
+            const dataAuth = {
+                token: 'Bearer ' + storage.getLocalToken()
+            }
+            this.socket.emit('authenticate', dataAuth);
+        },
+        addUser(user) {
+            const token = 'Bearer ' + storage.getLocalToken()
+            const actionClient = {
+                id_contact: user.id_contact,
+                message: '',
+                token: token,
+                actionType: 'adduser'
+            }
+
+            window.console.log(actionClient)
+            this.socket.emit('actionClient', actionClient)
         },
         sendMessage(user) {
             window.console.log(user)
@@ -85,7 +108,6 @@ export default {
         searchUser () {
             servicesPages.pages.searchUsers({ textSearch: this.textSearch })
                 .then(res => {
-                    window.console.log(res.data)
                     this.users = res.data.users
                 })
                 .catch(err => {
@@ -132,6 +154,9 @@ button {border-radius: 5px; background-color: #3f5fc7;}
     margin-top: -10px;
 }
 .menu-back:hover {
+    cursor: pointer;
+}
+.cursor-pointer {
     cursor: pointer;
 }
 </style>

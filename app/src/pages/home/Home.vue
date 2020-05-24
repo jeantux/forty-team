@@ -16,10 +16,11 @@ export default {
         contact: {},
         searchContacts: ''
       },
+      imageDefaultUser: 'images/icon-user-default.png',
       allContacts: [],
       contacts: [],
       profile: {},
-      socket: io('localhost:3000')
+      socket: io(process.env.VUE_APP_ROOT_API)
     }
   },
 	created() {
@@ -27,12 +28,45 @@ export default {
     this.getDataProfile()
     this.authenticateUser()
     this.socketsEvents()
+    this.getInvitations()
 	},
 	methods: {
     ...mapActions('auth', ['ActionSignOut']),
     signOut () {
       this.ActionSignOut()
       this.$router.push({ name: 'login' })
+    },
+    getInvitations() {
+      servicesPages.pages.invitations({})
+        .then(invitations => {
+          
+          for (const index in invitations) {
+            const invite = invitations[index]
+
+            const newUserConvide = {
+              invitation: true,
+              description: 'invitation',
+              id_contact: invite.contact_id,
+              name: invite.name,
+              picture: invite.picture,
+              notification: true
+            }
+
+            this.addNewInvite(newUserConvide)
+          }
+        })
+        .catch(err => window.console.log(err))
+    },
+    addNewInvite(newUserConvide) {
+          let existsInvitation = false
+          for (const index in this.allContacts) {
+              const contact = this.allContacts[index]
+              if (contact.id_contact == newUserConvide.id_contact)
+                existsInvitation = true
+          }
+
+          if (!existsInvitation)
+            this.allContacts.push(newUserConvide)
     },
     searchInContacs(){
       this.contacts = []
@@ -42,7 +76,6 @@ export default {
             this.contacts.push(contact)
           }
       }
-      // this.contacts
     },
     loadAllContacts() {
       this.contacts = this.allContacts
@@ -61,23 +94,22 @@ export default {
     socketsEvents() {
       this.socket.on('messages', data => {
         for (const key in this.contacts) {
-            const currentContact = this.contacts[key]
-            if ((currentContact !== undefined) && (data.id_contact === currentContact.id_contact)) {
-              if (currentContact.talks.length) {
-                currentContact.talks.push({method: 'replies', message: data.message})
-              } else {  
-                this.getMessages(currentContact, () => {
-                  currentContact.talks.push({method: 'replies', message: data.message})
-                })
-              }
-              if (this.currentState.contact.id_contact === currentContact.id_contact) {
-                this.scrollEnd()
-              } else {
-                currentContact.notification = true
-              }
+          const currentContact = this.contacts[key]
+          if ((currentContact !== undefined) && (data.id_contact === currentContact.id_contact)) {
+            if (currentContact.talks.length) {
+              currentContact.talks.push({method: 'replies', message: data.message})
             } else {
-              window.console.log('add new user')
+              this.getMessages(currentContact, () => {
+                currentContact.talks.push({method: 'replies', message: data.message})
+              })
             }
+            if (this.currentState.contact.id_contact === currentContact.id_contact) {
+              this.scrollEnd()
+            } else {
+              window.console.log('New message')
+              currentContact.notification = true
+            }
+          }
         }
       })
 
@@ -93,10 +125,22 @@ export default {
         }
       })
 
+      this.socket.on('adduser', data => {
+        const newUserConvide = {
+          invitation: true,
+          description: 'invitation',
+          id_contact: data.id_contact,
+          name: data.name,
+          picture: data.picture,
+          notification: true
+        }
+        
+        this.addNewInvite(newUserConvide)
+      })
+
       this.socket.on('connect', () => {
         this.authenticateUser()
       })
-
     },
     authenticateUser() {
       const dataAuth = {
@@ -105,12 +149,14 @@ export default {
       this.socket.emit('authenticate', dataAuth);
     },
 		changeTalk(contact) {
-      if (!contact.talks.length) {
-        this.getMessages(contact)
+      if (!contact.invitation) {
+        if (!contact.talks.length) {
+          this.getMessages(contact)
+        }
+        contact.notification = false
       }
-      contact.notification = false
       this.currentState.contact = contact
-      this.scrollEnd()
+      this.scrollEnd()      
 		},
 		getDataProfile() {
       servicesPages.pages.profile()
