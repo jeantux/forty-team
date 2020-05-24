@@ -1,40 +1,28 @@
-import configConnection from '../../../connections/config-pg'
-const { Client } = require('pg')
+const knex = require('../../../database/connection.js')
 
 function Contact(id) {
-  this.id = id === undefined ? -1 : id
+  this.id_user = id === undefined ? -1 : id
+
   this.getContacts = () => {
-    let id = this.id
+    let id = this.id_user
+
     return new Promise(async (resolve, reject) => {
     
-      const client = new Client(configConnection)
-
-      await client.connect()
-
-      let sqlQry = `
-        select c.contact_id,
-                p.full_name,
-                p.description,
-                p.image
-            from contacts c
-            inner join accounts a on a.user_id = c.contact_id
-            inner join profiles  p on p.profile_id = a.profile_id
-            where c.user_id = ${id}
-      `
-      client.query(sqlQry, (err, res) => {
-        if (err) {
-          console.log(err.stack)
-          reject({ msg: 'Falha interno ao selecionar contatos!' })
-        }
-
+      knex
+      .from("contacts as c")
+      .innerJoin("accounts as a", "a.user_id", "c.contact_id")
+      .innerJoin("profiles as p","p.profile_id", "a.profile_id")
+      .select("c.contact_id", "p.full_name", "p.description", "p.image")
+      .where('c.user_id', '=', id)
+      .then(allContacts => {
         let contacts = []
 
-        for (let contact in res.rows) {
+        for (let contact in allContacts) {
             let newContact = {
-                id_contact: res.rows[contact].contact_id,
-                name: res.rows[contact].full_name,
-                description: res.rows[contact].description,
-                picture: res.rows[contact].image,
+                id_contact: allContacts[contact].contact_id,
+                name: allContacts[contact].full_name,
+                description: allContacts[contact].description,
+                picture: allContacts[contact].image,
                 notification: false,
                 typing: false,
                 talks: []
@@ -43,10 +31,22 @@ function Contact(id) {
         }
 
         resolve({ contacts })
-
-        client.end()
       })
+      .catch(() => reject({ id: 0, msg: 'Error to select contacts!' }))
 
+    })
+  }
+
+  this.add = (contact_id) => {
+    return new Promise((resolve, reject) => {
+      knex
+      .insert([
+        { contact_id: this.id_user, user_id: contact_id },
+        { contact_id: contact_id, user_id: this.id_user }
+      ])
+      .into("contacts")
+      .then(() => resolve({ status: true })) 
+      .catch(() => reject({ msg: 'Error to execute insert in contact!' }))
     })
   }
 

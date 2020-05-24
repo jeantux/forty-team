@@ -26,8 +26,19 @@ function Invitations(id) {
         .select("i.contact_id", "p.full_name as name", "p.description", "p.image as picture")
         .where('i.user_id', '=', id)
         .then(profile => resolve( profile ))
-        .catch(() => reject({ id: 0, msg: 'Error to select profiles!' }))
+        .catch(() => reject({ id: 0, msg: 'Error to select invites deteiled!' }))
     })    
+  }
+
+  this.remove = (idContact) => {
+    return new Promise( async (resolve, reject) => {
+      knex('invitations')
+      .where('user_id', '=', id)
+      .andWhere('contact_id', '=', idContact)
+      .del()
+      .then(() => resolve({ status: true }) )
+      .catch(() => reject({ status: false }))
+    })
   }
 
   this.register = () => {

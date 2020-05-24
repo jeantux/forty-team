@@ -56,8 +56,8 @@
         <div class="messages">
           <div v-if="currentState.contact.invitation" class="invitation">
             <h2>Adicionar aos contatos</h2>
-            <button v-on:click="accept()" class="accept"> Sim </button>
-            <button v-on:click="reject()" class="reject"> Não </button>
+            <button v-on:click="acceptInvite(currentState.contact)" class="accept"> Sim </button>
+            <button v-on:click="rejectInvite(currentState.contact)" class="reject"> Não </button>
           </div>
           <ul>
             <li v-for="talk in this.currentState.contact.talks" :key="talk.id" :class="talk.method">

@@ -24,6 +24,8 @@ export default function (app) {
   app.post('/formalchat/sendmessage', AuthController.validateSession, MessagesController.sendMessage)
   app.get('/formalchat/search-users', AuthController.validateSession, SerchUsers.userList)
   app.get('/formalchat/invitations', AuthController.validateSession, Invitations.getInvitations)
+  app.post('/formalchat/acceptInvite', AuthController.validateSession, Invitations.accept)
+  app.post('/formalchat/rejectInvite', AuthController.validateSession, Invitations.reject)
 
   app.use((req, res) => {
     res.status(404).send({ error: '404 - Not found' })

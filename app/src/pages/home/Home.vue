@@ -38,8 +38,8 @@ export default {
     },
     getInvitations() {
       servicesPages.pages.invitations({})
-        .then(invitations => {
-          
+        .then(res => {
+          const invitations = res.data
           for (const index in invitations) {
             const invite = invitations[index]
 
@@ -57,6 +57,22 @@ export default {
         })
         .catch(err => window.console.log(err))
     },
+    acceptInvite(user) {
+      servicesPages.pages.acceptInvite({ id_contact: user.id_contact })
+        .then(() => {
+          this.getContacts()
+          this.getInvitations()
+        })
+        .catch((err) => { window.console.log(err) })
+    },
+    rejectInvite(user) {
+      servicesPages.pages.acceptInvite({ id_contact: user.id_contact })
+        .then(() => {
+          this.getContacts()
+          this.getInvitations()
+        })
+        .catch(() => {  })
+    },    
     addNewInvite(newUserConvide) {
           let existsInvitation = false
           for (const index in this.allContacts) {
