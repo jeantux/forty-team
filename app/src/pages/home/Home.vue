@@ -60,6 +60,7 @@ export default {
     acceptInvite(user) {
       servicesPages.pages.acceptInvite({ id_contact: user.id_contact })
         .then(() => {
+          this.currentState.contact = {}
           this.getContacts()
           this.getInvitations()
         })

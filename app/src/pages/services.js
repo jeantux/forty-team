@@ -6,6 +6,8 @@ export default { pages:
       sendmessage: { method: 'post', url: 'sendmessage' },
       searchUsers: { method: 'get', url: 'search-users' },
       invitations: { method: 'get', url: 'invitations' },
+      acceptInvite: { method: 'post', url: 'acceptInvite' },
+      rejectInvite: { method: 'post', url: 'rejectInvite' }
     }
   }
   

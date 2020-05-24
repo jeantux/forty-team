@@ -49,7 +49,7 @@ function Invitations(id) {
         user_id: this.id
       })
       .into("invitations")
-      .then(profile => resolve({ status: true })) 
+      .then(() => resolve({ status: true })) 
       .catch(() => reject({ msg: 'Error to execute insert in invitations!' }))
     })
   }

@@ -29,7 +29,8 @@ function Profile(id) {
         description: this.description
       })
       .into("profiles")
-      .then(profile => resolve('profile_id')) // add profile_id
+      .returning('profile_id')
+      .then(profile => resolve(profile)) // add profile_id
       .catch(() => reject({ msg: 'Error to execute insert in profile!' }))
     })
   }
