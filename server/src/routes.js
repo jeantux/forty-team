@@ -4,6 +4,7 @@ import ProfileController from './controllers/formalchat/profile/ProfileControlle
 import MessagesController from './controllers/formalchat/messages/MessagesController'
 import SerchUsers from './controllers/formalchat/searchUsers/SearchUsersController'
 import Users from './controllers/formalchat/users/UsersController'
+import Invitations from './controllers/formalchat/invitations/Invitations'
 
 export default function (app) {
   app.get('/', (req, res) => {
@@ -22,6 +23,7 @@ export default function (app) {
   app.get('/formalchat/messages', AuthController.validateSession, MessagesController.messages)
   app.post('/formalchat/sendmessage', AuthController.validateSession, MessagesController.sendMessage)
   app.get('/formalchat/search-users', AuthController.validateSession, SerchUsers.userList)
+  app.get('/formalchat/invitations', AuthController.validateSession, Invitations.getInvitations)
 
   app.use((req, res) => {
     res.status(404).send({ error: '404 - Not found' })
