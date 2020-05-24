@@ -20,7 +20,7 @@ cd forty-team <br>
 
 ## Configuration 
 ### server
-  Add postgres configuration data to server <i>/src/connections/config-pg.js</i>
+  Add postgres configuration data to server <i>/forty-team/server/knexfile.js</i>
 
   npm install <br>
   npx knex migrate:latest <br>
