@@ -1,10 +1,10 @@
-import AuthController from './controllers/formalchat/auth/AuthController'
-import ContactsController from './controllers/formalchat/contacts/ContactsController'
-import ProfileController from './controllers/formalchat/profile/ProfileController'
-import MessagesController from './controllers/formalchat/messages/MessagesController'
-import SerchUsers from './controllers/formalchat/searchUsers/SearchUsersController'
-import Users from './controllers/formalchat/users/UsersController'
-import Invitations from './controllers/formalchat/invitations/Invitations'
+import AuthController from './controllers/fortyteam/auth/AuthController'
+import ContactsController from './controllers/fortyteam/contacts/ContactsController'
+import ProfileController from './controllers/fortyteam/profile/ProfileController'
+import MessagesController from './controllers/fortyteam/messages/MessagesController'
+import SerchUsers from './controllers/fortyteam/searchUsers/SearchUsersController'
+import Users from './controllers/fortyteam/users/UsersController'
+import Invitations from './controllers/fortyteam/invitations/Invitations'
 
 export default function (app) {
   app.get('/', (req, res) => {
@@ -14,18 +14,18 @@ export default function (app) {
     })
   })
 
-  app.post('/formalchat/login', AuthController.authenticate)
-  app.post('/formalchat/register-user', Users.registerUser)
+  app.post('/fortyteam/login', AuthController.authenticate)
+  app.post('/fortyteam/register-user', Users.registerUser)
   
-  app.post('/formalchat/load-session', AuthController.validateSession, AuthController.loadSession)
-  app.get('/formalchat/contactslist', AuthController.validateSession, ContactsController.contactsList)
-  app.get('/formalchat/profile', AuthController.validateSession, ProfileController.profile)
-  app.get('/formalchat/messages', AuthController.validateSession, MessagesController.messages)
-  app.post('/formalchat/sendmessage', AuthController.validateSession, MessagesController.sendMessage)
-  app.get('/formalchat/search-users', AuthController.validateSession, SerchUsers.userList)
-  app.get('/formalchat/invitations', AuthController.validateSession, Invitations.getInvitations)
-  app.post('/formalchat/acceptInvite', AuthController.validateSession, Invitations.accept)
-  app.post('/formalchat/rejectInvite', AuthController.validateSession, Invitations.reject)
+  app.post('/fortyteam/load-session', AuthController.validateSession, AuthController.loadSession)
+  app.get('/fortyteam/contactslist', AuthController.validateSession, ContactsController.contactsList)
+  app.get('/fortyteam/profile', AuthController.validateSession, ProfileController.profile)
+  app.get('/fortyteam/messages', AuthController.validateSession, MessagesController.messages)
+  app.post('/fortyteam/sendmessage', AuthController.validateSession, MessagesController.sendMessage)
+  app.get('/fortyteam/search-users', AuthController.validateSession, SerchUsers.userList)
+  app.get('/fortyteam/invitations', AuthController.validateSession, Invitations.getInvitations)
+  app.post('/fortyteam/acceptInvite', AuthController.validateSession, Invitations.accept)
+  app.post('/fortyteam/rejectInvite', AuthController.validateSession, Invitations.reject)
 
   app.use((req, res) => {
     res.status(404).send({ error: '404 - Not found' })

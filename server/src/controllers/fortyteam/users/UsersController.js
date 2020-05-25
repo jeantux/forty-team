@@ -1,4 +1,4 @@
-import Users from '../../../models/formalchat/users/users.js'
+import Users from '../../../models/fortyteam/users/users.js'
 
 export default {
     registerUser(req, res) {

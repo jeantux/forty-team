@@ -1,4 +1,4 @@
-import Search from '../../../models/formalchat/searchUsers/searchUsers'
+import Search from '../../../models/fortyteam/searchUsers/searchUsers'
 
 export default {
     userList(req, res) {

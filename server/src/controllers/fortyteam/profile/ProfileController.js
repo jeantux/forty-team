@@ -1,4 +1,4 @@
-import Profile from '../../../models/formalchat/profile/profile.js'
+import Profile from '../../../models/fortyteam/profile/profile.js'
 
 export default {
     profile(req, res) {

@@ -7,7 +7,7 @@ Vue.use(VueResource)
 
 const http = Vue.http
 
-http.options.root = 'http://localhost:3000/formalchat/'
+http.options.root = 'http://localhost:3000/fortyteam/'
 http.interceptors.push(interceptors)
 
 Object.keys(servicesAuth).map(service => {

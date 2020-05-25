@@ -1,7 +1,7 @@
 import JWT from 'jsonwebtoken'
-import Messages from "../../models/formalchat/messages/messages"
-import Profile from '../../models/formalchat/profile/profile.js'
-import Invitations from '../../models/formalchat/invitations/invitations.js'
+import Messages from "../../models/fortyteam/messages/messages"
+import Profile from '../../models/fortyteam/profile/profile.js'
+import Invitations from '../../models/fortyteam/invitations/invitations.js'
 require("dotenv-safe").config();
 const redis = require("redis");
 

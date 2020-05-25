@@ -1,4 +1,4 @@
-import Messages from '../../../models/formalchat/messages/messages'
+import Messages from '../../../models/fortyteam/messages/messages'
 
 export default {
     messages(req, res) {

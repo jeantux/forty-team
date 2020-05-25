@@ -1,4 +1,4 @@
-import Contacts from '../../../models/formalchat/contact/contact'
+import Contacts from '../../../models/fortyteam/contact/contact'
 
 export default {
     contactsList(req, res) {

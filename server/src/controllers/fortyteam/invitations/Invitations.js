@@ -1,5 +1,5 @@
-import Invitations from '../../../models/formalchat/invitations/invitations.js'
-import Contact from '../../../models/formalchat/contact/contact.js'
+import Invitations from '../../../models/fortyteam/invitations/invitations.js'
+import Contact from '../../../models/fortyteam/contact/contact.js'
 
 export default {
     getInvitations(req, res) {

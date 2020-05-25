@@ -1,5 +1,5 @@
 import JWT from 'jsonwebtoken'
-import Auth from '../../../models/formalchat/auth/auth'
+import Auth from '../../../models/fortyteam/auth/auth'
 require("dotenv-safe").config();
 
 const SECRET = process.env.KEY_SECRET
