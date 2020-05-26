@@ -19,6 +19,8 @@ Clone this repo to your local machine using https://github.com/jeaanca/forty-tea
 cd forty-team <br>
 
 ## Configuration 
+Must have installed **postgres** and **redis** on the machine
+
 ### server
   Add postgres configuration data to server <i>/forty-team/server/knexfile.js</i>
 
