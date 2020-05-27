@@ -23,19 +23,18 @@ Must have installed **postgres** and **redis** on the machine
 
 ### server
   Add postgres configuration data to server <i>/forty-team/server/knexfile.js</i>
-
-  npm install <br>
-  npx knex migrate:latest <br>
+```bash
+  npm install
+  npx knex migrate:latest
   npm start
-
+```
 ### app  
   cp .env.example .env <br>
   In the .env file add the key that will be used in the JWT.
-  
-
-  npm install <br>
+```bash  
+  npm install
   npm run serve
-
+```
 ## Contributors
 
 | [<img src="https://avatars0.githubusercontent.com/u/38164565?s=400&u=d4fb65931ff45a914df31ca97e017bbd7f6bb04d&v=4" width="110"><br><sub>@oLucasPopov</sub>](https://github.com/oLucasPopov) 
