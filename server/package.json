@@ -1,7 +1,7 @@
 {
   "name": "simple-node-api",
   "version": "1.0.0",
-  "description": "API - Domtec XML",
+  "description": "API - FortyTeam",
   "main": "src/app.js",
   "scripts": {
     "start": "node_modules/.bin/nodemon src/app.js --exec babel-node --",

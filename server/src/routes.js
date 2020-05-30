@@ -9,7 +9,7 @@ import Invitations from './controllers/fortyteam/invitations/Invitations'
 export default function (app) {
   app.get('/', (req, res) => {
     res.status(200).send({
-      message: 'Hello - wellcome to fortyTeam',
+      message: 'Hello - welcome to fortyTeam',
       version: '1.0.0.0'
     })
   })
