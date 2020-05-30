@@ -2,6 +2,7 @@ import configConnection from '../../../connections/config-pg'
 import Profile from '../profile/profile'
 const { Client } = require('pg')
 const crypt = require('../../../methods/crypt.js')
+const connection = require('../../../database/connection')
 
 function Users() {
   this.user_id = 0
@@ -12,69 +13,47 @@ function Users() {
   this.last_login = 0
   this.profile_id = 0
 
-  this.load = (user_id) => {
-    let id = user_id ? user_id : this.user_id
-    return new Promise(async (resolve, reject) => {
+  this.load = async (user_id = this.user_id) => {
 
-      const client = new Client(configConnection)
-      await client.connect()
+    try {
+      const user = await connection('accounts')
+        .select([
+          'user_id',
+          'username',
+          'password',
+          'email',
+          'created_on',
+          'last_login'
+        ])
+        .where({ user_id })
 
-      let sqlQry = ` select a.user_id,
-                            a.username,
-                            a.password,
-                            a.email,
-                            a.created_on,
-                            a.last_login
-                       from accounts a
-                      where a.user_id = ${id}
-                   `
-      client.query(sqlQry, (err, res) => {
-        if (err) {
-          console.log(err.stack)
-          reject({ msg: 'Falha interno ao selecionar usuarios!' })
-        }
+      this.user_id = user.user_id
+      this.username = user.username
+      this.password = user.password
+      this.email = user.email
+      this.created_on = user.created_on
+      this.last_login = user.last_login
 
-        const user = res.rows[0]
-
-        this.user_id = user.user_id
-        this.username = user.username
-        this.password = user.password
-        this.email = user.email
-        this.created_on = user.created_on
-        this.last_login = user.last_login
-
-        resolve()
-        client.end()
-      })
-    })
+      return Promise.resolve()
+    } catch (e) {
+      return Promise.reject({ msg: 'Falha interna ao selecionar usuarios!' })
+    }
   }
 
-  this.validateUserExists = (username) => {
-    return new Promise(async (resolve, reject) => {
+  this.validateUserExists = async (username) => {
+    try {
+      let [{ count }] = await connection('accounts')
+        .count()
+        .whereRaw('upper(username) = upper(?)', username)
 
-      const client = new Client(configConnection)
-      await client.connect()
+      return (
+        count == 0 ? Promise.resolve() : Promise.reject({ msg: 'Usuário já existente, tente outro username!' })
+      )
 
-      let sqlQry = ` select a.user_id
-                       from accounts a
-                      where upper(a.username) = upper('${username}')
-                   `
-      client.query(sqlQry, (err, res) => {
-        if (err) {
-          console.log(err.stack)
-          reject({ msg: 'Falha ao vilidar usuario!' })
-        }
-        
-        if (res.rows.length === 0) {
-          resolve()
-        }
-        else {
-          reject({ msg: 'Usuário já existente, tente outro username!' })
-        }
-        client.end()
-      })
-
-    })   
+    } catch (e) {
+      console.log(e)
+      return Promise.reject({ msg: 'Falha ao validar usuario!' })
+    }
   }
 
   this.validate = () => {
@@ -83,39 +62,31 @@ function Users() {
         reject({ msg: err.msg === undefined ? 'O username é obrigatório!' : err.msg })
       } else {
         this.validateUserExists(this.username)
-        .then(() => resolve())
-        .catch(err => { reject({ msg: err.msg === undefined ? 'Usuario já existente' : err.msg }) })
-      }
-    }) 
-  }
-
-  this.register = () => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const profile = new Profile()
-        profile.name = this.username
-        const profile_id = await profile.register()
-        const passCrypted = crypt.cryptPass(this.password)
-    
-        let sqlQry = ` INSERT INTO accounts (username, "password", email, profile_id)
-                                   VALUES  ('${this.username}', '${passCrypted}', '${this.email}', ${profile_id})
-                     `
-        const client = new Client(configConnection)
-        await client.connect()
-        client.query(sqlQry, (err, res) => {
-          if (err) {
-            console.log(err.stack)
-            reject({ msg: 'Falha interna ao inserir usuario!' })
-          }
-  
-          client.end()
-          resolve()
-        })
-      } catch (err) {
-        console.log(err)
-        reject({ msg: 'Falha interna!' })
+          .then(() => resolve())
+          .catch(err => { reject({ msg: err.msg === undefined ? 'Usuario já existente' : err.msg }) })
       }
     })
+  }
+
+  this.register = async () => {
+    try {
+      const profile = new Profile()
+      profile.name = this.username
+      const profile_id = await profile.register()
+      const passCrypted = crypt.cryptPass(this.password)
+
+      await connection('accounts')
+        .insert({
+          username: this.username,
+          password: passCrypted,
+          email: this.email,
+          profile_id: profile_id
+        })
+
+      return Promise.resolve()
+    } catch (e) {
+      return Promise.reject({ msg: 'Falha interna!' })
+    }
   }
 }
 

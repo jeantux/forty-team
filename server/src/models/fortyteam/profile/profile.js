@@ -1,38 +1,42 @@
-const knex = require('../../../database/connection.js')
+const connection = require('../../../database/connection')
 
 function Profile(id) {
-  this.id          = id === undefined ? -1 : id
-  this.name        = ''
-  this.phone       = ''
+  this.id = id === undefined ? -1 : id
+  this.name = ''
+  this.phone = ''
   this.description = ''
 
-  this.getProfile = () => {
+  this.getProfile = async () => {
+    console.log('getprofile')
     const id = this.id
-    return new Promise(async (resolve, reject) => {
-        knex
-        .from("accounts as a")
-        .leftJoin("profiles as p", "p.profile_id", "a.profile_id")
+
+    try {
+      const profile = await connection('accounts as a')
         .select("p.full_name", "p.description", "p.image")
-        .where('a.user_id', '=', id)
+        .leftJoin("profiles as p", "p.profile_id", "a.profile_id")
+        .whereRaw('a.user_id = (?)', id)
         .first()
-        .then(profile => resolve( profile ))
-        .catch(() => reject({ id: 0, msg: 'Error to select profiles!' }))
-    })
+
+      return Promise.resolve(profile)
+    } catch (e) {
+      return Promise.reject({ id: 0, msg: 'Error while selecting profile!' })
+    }
   }
 
-  this.register = () => {
-    return new Promise( async (resolve, reject) => {
-      knex
-      .insert({
-        full_name: this.name,
-        phone: this.phone,
-        description: this.description
-      })
-      .into("profiles")
-      .returning('profile_id')
-      .then(profile => resolve(profile)) // add profile_id
-      .catch(() => reject({ msg: 'Error to execute insert in profile!' }))
-    })
+  this.register = async () => {
+    try {
+      const [profile_id] = await connection('profiles')
+        .returning('profile_id')
+        .insert({
+          full_name: this.name,
+          phone: this.phone,
+          description: this.description
+        })
+
+      return Promise.resolve(profile_id)
+    } catch (e) {
+      return Promise.reject({ msg: 'Error to execute insert in profile!' })
+    }
   }
 }
 
