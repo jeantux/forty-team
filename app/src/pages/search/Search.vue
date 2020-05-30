@@ -41,13 +41,6 @@
                                 </div>
                             </div>
                         </div>
-        
-                    </div>
-                    <div v-if="false" class="card-body">       
-                        <p class="card-text">                            
-                            Extremamente leve e robusto, proporciona comodidade no transporte e estabilidade na hora do disparo da fotografia. O equipamento possui travas de elevação e de inclinação vertical, pernas retráteis com ajuste em 4 alturas e haste central com encaixe retrátil na base.
-                            O tripé vem acompanhado de um adaptador para smartphone, que permitirá a gravação de momentos incríveis e com muita mobilidade.
-                        </p>
                     </div>
                 </div>
             </div>
