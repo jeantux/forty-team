@@ -67,8 +67,9 @@ export default {
         .catch((err) => { window.console.log(err) })
     },
     rejectInvite(user) {
-      servicesPages.pages.acceptInvite({ id_contact: user.id_contact })
+      servicesPages.pages.rejectInvite({ id_contact: user.id_contact })
         .then(() => {
+          this.currentState.contact = {}
           this.getContacts()
           this.getInvitations()
         })
@@ -185,7 +186,8 @@ export default {
 			})
 		},
 		getContacts() {
-			this.contacts = []
+      this.contacts = []
+      this.allContacts = []
       servicesPages.pages.contactslist()
 			.then(res => {
         this.allContacts = res.data.contacts
