@@ -552,18 +552,18 @@ body {
   #frame .content .messages ul li:nth-last-child(1) {
     margin-bottom: 20px;
   }
-  #frame .content .messages ul li.sent img {
+  #frame .content .messages ul li.replies img {
     margin: 6px 8px 0 0;
   }
-  #frame .content .messages ul li.sent p {
+  #frame .content .messages ul li.replies p {
     background: #ffffff;
     color: #475356;
   }
-  #frame .content .messages ul li.replies img {
+  #frame .content .messages ul li.sent img {
     float: right;
     margin: 6px 0 0 8px;
   }
-  #frame .content .messages ul li.replies p {
+  #frame .content .messages ul li.sent p {
     background: #3f5fc7;
     float: right;
     color: #ffffff;

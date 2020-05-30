@@ -61,14 +61,13 @@
           </div>
           <ul>
             <li v-for="talk in this.currentState.contact.talks" :key="talk.id" :class="talk.method">
-              
               <img v-if="talk.method === 'sent'"    :src="profile.img ? profile.img : imageDefaultUser" alt="">
-              <img v-if="talk.method === 'replies'" :src="currentState.contact.picture" alt="">
+              <img v-if="talk.method === 'replies'" :src="currentState.contact.picture ? currentState.contact.picture : imageDefaultUser" alt="">
               <p> {{ talk.message }} </p>
             </li>
           </ul>
         </div>
-        <div class="message-input" v-if="Object.keys(currentState.contact).length > 0">
+        <div class="message-input" v-if="Object.keys(currentState.contact).length > 0 && !currentState.contact.invitation">
           <div class="wrap">
             <textarea
               cols="1"
