@@ -1,7 +1,7 @@
 import Cors from 'cors'
 import express from 'express'
 import routes from './routes'
-import handlerSocketIo from './controllers/handler-socket'
+import handlerSocketIo from './controllers/handlerSocket/handlerSocket.js'
 import bodyParser from 'body-parser'
 import preflight from './methods/preflight'
 
