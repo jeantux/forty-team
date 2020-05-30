@@ -7,7 +7,8 @@ export default { pages:
       searchUsers: { method: 'get', url: 'search-users' },
       invitations: { method: 'get', url: 'invitations' },
       acceptInvite: { method: 'post', url: 'acceptInvite' },
-      rejectInvite: { method: 'post', url: 'rejectInvite' }
+      rejectInvite: { method: 'post', url: 'rejectInvite' },
+      config: { method: 'post', url: 'config' }
     }
   }
   
