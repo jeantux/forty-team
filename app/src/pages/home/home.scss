@@ -663,7 +663,7 @@ body {
   .invitation {
     width: 100%;
     height: 100px;
-    background: #1d6cb1;
+    background: #fff;
     text-align: center;
   }
 
@@ -675,10 +675,10 @@ body {
     display: inline;
     margin-left: 5px;
   }
-  .invitation h2 {color: #fff;}
+  .invitation h2 {color: #2f8aca;}
   .invitation button:hover {
     background: white;
     color: black;
   }
   .invitation .reject:hover{background: rgb(243, 180, 180);}
-  .invitation .accept:hover{background: rgb(138, 238, 205);}
+  .invitation .accept:hover{background: rgb(158, 172, 250);}
