@@ -32,12 +32,12 @@
                                     <div class="h5 m-0">{{ user.name }}</div>
                                     <div class="h7 text-muted mb-2">{{ user.description }}</div>
                                     <div v-show="user.mycontact" class="tag-friends text-center">Amigos</div>
+                                    <div v-show="user.invitepending" class="tag-pending text-center">Pendente</div>
                                 </div>
                             </div>
                             <div>
-                                <div class="dropdown">
-                                    <a v-show="user.mycontact" v-on:click="sendMessage(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-paper-plane"></i></a>
-                                    <a v-show="!user.mycontact" v-on:click="addUser(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-user-plus"></i></a>
+                                <div class="dropdown">       
+                                    <a v-show="!user.mycontact && !user.invitepending" v-on:click="addUser(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-user-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -88,9 +88,9 @@ export default {
                 token: token,
                 actionType: 'adduser'
             }
-
-            window.console.log(actionClient)
+            
             this.socket.emit('actionClient', actionClient)
+            user.invitepending = true
         },
         sendMessage(user) {
             window.console.log(user)
@@ -137,10 +137,21 @@ button {border-radius: 5px; background-color: #3f5fc7;}
 .card-link-active:hover { background: #2b4e8f; color: #fff; text-decoration: none;}
 .card-link:hover { background: #3f5fc7; color: white;}
 .tag-friends {
-    background: #4d5264;
+    background: #009238;
     color: #ffffff;
     border-radius: 5px;
-    width: 40px;
+    width: 60px;
+    font-size: 10px;
+    float: right;
+    position: absolute;
+    margin-top: -10px;
+}
+
+.tag-pending {
+    background: #b48d0c;
+    color: #ffffff;
+    border-radius: 5px;
+    width: 60px;
     font-size: 10px;
     float: right;
     position: absolute;

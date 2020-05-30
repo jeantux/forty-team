@@ -19,15 +19,20 @@ function SearchUsers(id, textSearch) {
                       or upper(a.username) like upper('%${textSearch}%')
                         )
                   `
-      let sqlQry = `  select a.user_id   as id_contact
+      // remove distinct after add validations to not duplicate record in invitations
+      let sqlQry = `  select distinct on (a.user_id)
+                             a.user_id as id_contact
                             ,p.full_name as name
                             ,p.description
                             ,p.image
-                            ,not c.user_id is null as mycontact
-                        from accounts       a
-                      inner join profiles  p on p.profile_id = a.profile_id
-                        left join contacts c on c.user_id = ${id}
-                                            and c.contact_id = a.user_id
+                            ,not c.user_id is null    as mycontact
+                            ,not i.contact_id is null as invitePending
+                        from accounts          a
+                       inner join profiles     p on p.profile_id = a.profile_id
+                        left join invitations  i on i.user_id = a.user_id
+                                                and i.contact_id = ${id}
+                        left join contacts     c on c.user_id = ${id}
+                                                and c.contact_id = a.user_id
                       where a.user_id <> ${id}
                       ${where}
                    `
