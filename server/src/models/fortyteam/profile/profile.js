@@ -7,7 +7,6 @@ function Profile(id) {
   this.description = ''
 
   this.getProfile = async () => {
-    console.log('getprofile')
     const id = this.id
 
     try {
