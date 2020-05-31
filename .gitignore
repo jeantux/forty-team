@@ -1,4 +1,6 @@
 app/node_modules
+app/dist
 server/node_modules
 server/.env
 server/package-lock.json
+server/build
