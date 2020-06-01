@@ -230,7 +230,7 @@ export default {
 				id_contact: this.currentState.contact.id_contact,
         message: this.currentState.message,
         token: token,
-        actionType: 'message'
+        actionType: 'messages'
 			}
       this.currentState.message = ''
       this.socket.emit('actionClient', actionClient);
