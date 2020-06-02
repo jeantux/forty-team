@@ -8,8 +8,10 @@ function sendEvent(socket, socket_id_send, action, obj) {
 async function sendMessage(user_id, data, socket) {   
     binds.getSocketId(data.id_contact)
         .then(socket_id => {
-            if (data.actionType === 'messages')
+            if (data.actionType === 'messages') {
                 sendEvent(socket, socket_id, data.actionType, { id_contact: user_id, message: data.message })
+                binds.registerMessageDatabase(user_id, data.id_contact, data.message)
+            }
 
             else if (data.actionType === 'typing') {
                 sendEvent(socket, socket_id, data.actionType, { id_contact: user_id, typing: true })

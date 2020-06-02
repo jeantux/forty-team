@@ -2,11 +2,9 @@ const redis = require("redis");
 import Messages from "../../models/fortyteam/messages/messages"
 import Invitations from '../../models/fortyteam/invitations/invitations.js'
 
-function registerMessageDatabase(user_id, data) {
-    if (data.actionType === 'message') {
-        const messages = new Messages(data.id_contact, user_id)
-        messages.sendMessage(data.message)    
-    }
+function registerMessageDatabase(user_id, contact_id, message) {
+    const messages = new Messages(contact_id, user_id)
+    messages.sendMessage(message)    
 }
 
 function registerUserId(user_id, socket_id) {

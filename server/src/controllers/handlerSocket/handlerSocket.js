@@ -12,8 +12,7 @@ function handlerSocket(io) {
 
         socket.on('actionClient', data => {
             validToken(data.token, decoded => {
-                if (decoded) {                    
-                    binds.registerMessageDatabase(decoded.user.user_id, data)                        
+                if (decoded) {                       
                     messages.sendMessage(decoded.user.user_id, data, socket)
                 }
             })  
