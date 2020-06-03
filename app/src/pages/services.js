@@ -1,6 +1,7 @@
 export default { pages: 
     {
       profile: { method: 'get', url: 'profile' },
+      setProfile: { method: 'post', url: 'profile' },
       contactslist: { method: 'get', url: 'contactslist' },
       messages: { method: 'get', url: 'messages' },
       sendmessage: { method: 'post', url: 'sendmessage' },

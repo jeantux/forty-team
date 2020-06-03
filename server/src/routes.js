@@ -5,6 +5,7 @@ import MessagesController from './controllers/fortyteam/messages/MessagesControl
 import SerchUsers from './controllers/fortyteam/searchUsers/SearchUsersController'
 import Users from './controllers/fortyteam/users/UsersController'
 import Invitations from './controllers/fortyteam/invitations/Invitations'
+import config from './controllers/fortyteam/config/Config'
 
 export default function (app) {
   app.get('/', (req, res) => {
@@ -19,7 +20,8 @@ export default function (app) {
   
   app.post('/fortyteam/load-session', AuthController.validateSession, AuthController.loadSession)
   app.get('/fortyteam/contactslist', AuthController.validateSession, ContactsController.contactsList)
-  app.get('/fortyteam/profile', AuthController.validateSession, ProfileController.profile)
+  app.get('/fortyteam/profile', AuthController.validateSession, ProfileController.getProfile)
+  app.post('/fortyteam/profile', AuthController.validateSession, ProfileController.saveDataProfile)
   app.get('/fortyteam/messages', AuthController.validateSession, MessagesController.messages)
   app.post('/fortyteam/sendmessage', AuthController.validateSession, MessagesController.sendMessage)
   app.get('/fortyteam/search-users', AuthController.validateSession, SerchUsers.userList)

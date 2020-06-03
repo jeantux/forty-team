@@ -9,13 +9,13 @@
         </nav>
 
         <h1 class="mt-1 ml-3"> Configurações </h1>
-        <h2 class="mt-1 ml-4">Perfil</h2>
+        <h2 class="mt-1 ml-4">profile</h2>
         <form class="mt-1 mx-5">
             <div class="image">
                 <img
                   type="image"
                   class="image-default"
-                  :src="perfil.image ? perfil.image : imageDefault"
+                  :src="profile.image ? profile.image : imageDefault"
                   v-on:click="loadImage()"
                 />
                 <input
@@ -28,19 +28,19 @@
 
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <input v-bind="perfil.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                <input v-model="profile.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
                 <small id="emailHelp" class="form-text text-muted">Deixe sua conta mais segura.</small>
             </div>
 
             <div class="form-group">
                 <label for="exampleInputEmail1">Nome</label>
-                <input v-bind="perfil.name" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Nome Completo">
+                <input v-model="profile.full_name" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Nome Completo">
             </div>
 
             <div class="form-group">
                 <label for="exampleInputEmail1">Status</label>
-                <input v-bind="perfil.status" type="text" class="form-control" id="status" aria-describedby="emailHelp" placeholder="Adicione uma descrição aqui ...">
-                <small id="status" class="form-text text-muted">Será exibido junto com seu perfil.</small>
+                <input v-model="profile.description" type="text" class="form-control" id="status" aria-describedby="emailHelp" placeholder="Adicione uma descrição aqui ...">
+                <small id="status" class="form-text text-muted">Será exibido junto com seu profile.</small>
             </div>
 
             <button v-on:click="save" class="btn btn-primary">Salvar</button>
@@ -56,16 +56,17 @@ export default {
     data () {
         return {
             imageDefault: 'images/icon-user-default.png',
-            perfil: {
+            profile: {
                 image: '',
-                status: '',
-                name: '',
+                description: '',
+                full_name: '',
                 email: ''
             },
-            selectFile: null
+            selectFile: null,
         }
     },
     created () {
+        this.getDataProfile()
     },
     methods: {
         loadImage () {
@@ -78,15 +79,31 @@ export default {
         onFileSelected (event) {
             this.selectFile = event.target.files[0]
         },
-        save () {
-            const data = this.perfil
-            servicesPages.pages.config( data )
+		getDataProfile() {
+            servicesPages.pages.profile()
+            .then(res => {
+                this.profile = res.data.profile
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+        uploadImage() {
+
+        },
+        saveProfile() {
+            const data = this.profile
+            servicesPages.pages.setProfile( data )
                 .then(() => {
                     this.goToPage('home')
                 })
                 .catch(err => {
                     window.console.log(err)
                 })
+        },
+        save() {
+            this.uploadImage()
+            this.saveProfile()
         }
     }
 }
@@ -100,4 +117,11 @@ export default {
         width: 120px;
     }
     .image small { display: inline; }
+    
+    .menu-back:hover {
+        cursor: pointer;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
 </style>
