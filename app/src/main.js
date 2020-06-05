@@ -5,8 +5,8 @@ import store from './store'
 import Toasted from 'vue-toasted'
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import './assets/scss/app.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/scss/app.scss'
 
 
 Vue.use(Toasted, { duration: 4000 })
