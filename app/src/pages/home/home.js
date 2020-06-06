@@ -35,6 +35,14 @@ data () {
       this.ActionSignOut()
       this.$router.push({ name: 'login' })
     },
+    notity() {
+      let audio = new Audio('audio/notify-001.mp3');
+      window.console.log(audio)
+      audio.addEventListener('canplaythrough', function() {
+          window.console.log('deu play')
+          audio.play();
+      });
+    },
     getInvitations() {
       servicesPages.pages.invitations({})
         .then(res => {
@@ -113,6 +121,7 @@ data () {
     },
     socketsEvents() {
       this.socket.on('messages', data => {
+        this.notity()
         for (const key in this.contacts) {
           const currentContact = this.contacts[key]
           if ((currentContact !== undefined) && (data.id_contact === currentContact.id_contact)) {
@@ -168,7 +177,7 @@ data () {
       }
       this.socket.emit('authenticate', dataAuth);
     },
-        changeTalk(contact) {
+    changeTalk(contact) {
       if (!contact.invitation) {
         if (!contact.talks.length) {
           this.getMessages(contact)
@@ -177,8 +186,8 @@ data () {
       }
       this.currentState.contact = contact
       this.scrollEnd()      
-        },
-        getDataProfile() {
+    },
+    getDataProfile() {
       servicesPages.pages.profile()
             .then(res => {
         this.profile = res.data.profile
@@ -186,8 +195,8 @@ data () {
             .catch(err => {
                 console.log(err)
             })
-        },
-        getContacts() {
+    },
+    getContacts() {
       this.contacts = []
       this.allContacts = []
       servicesPages.pages.contactslist()
@@ -198,8 +207,8 @@ data () {
             .catch(err => {
                 console.log(err)
             })
-        },
-        getMessages(contact, callBackFunction) {
+    },
+    getMessages(contact, callBackFunction) {
       this.talks = []
       servicesPages.pages.messages({contactId: contact.id_contact})
             .then(res => {
@@ -213,9 +222,9 @@ data () {
             .catch(err => {
                 console.log(err)
       })
-        },
-        newMessage() {
-            if (this.currentState.message.trim() == '') {
+    },
+    newMessage() {
+      if (this.currentState.message.trim() == '') {
                 return false;
       }
 
@@ -228,12 +237,12 @@ data () {
       this.currentState.contact.talks.push({ method: 'sent', message: this.currentState.message })
       this.scrollEnd()
 
-            const actionClient = {
-                id_contact: this.currentState.contact.id_contact,
-        message: this.currentState.message,
-        token: token,
-        actionType: 'messages'
-            }
+        const actionClient = {
+          id_contact: this.currentState.contact.id_contact,
+          message: this.currentState.message,
+          token: token,
+          actionType: 'messages'
+        }
       this.currentState.message = ''
       this.socket.emit('actionClient', actionClient);
     },
