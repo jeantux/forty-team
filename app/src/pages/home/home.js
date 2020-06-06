@@ -121,7 +121,6 @@ data () {
     },
     socketsEvents() {
       this.socket.on('messages', data => {
-        this.notity()
         for (const key in this.contacts) {
           const currentContact = this.contacts[key]
           if ((currentContact !== undefined) && (data.id_contact === currentContact.id_contact)) {
@@ -135,7 +134,7 @@ data () {
             if (this.currentState.contact.id_contact === currentContact.id_contact) {
               this.scrollEnd()
             } else {
-              window.console.log('New message')
+              this.notity()
               currentContact.notification = true
             }
           }
