@@ -6,6 +6,7 @@ function Profile(id) {
   this.phone = ''
   this.description = ''
   this.email = ''
+  this.image = ''
 
   this.getProfile = async () => {
     const id = this.id
@@ -50,6 +51,22 @@ function Profile(id) {
           phone: this.phone,
           description: this.description,
           email: this.email
+        })
+        .whereRaw('profile_id = (?)', id)
+
+      return Promise.resolve(profile_id)
+    } catch (e) {
+      return Promise.reject({ msg: 'Error to execute update in profile!' })
+    }
+  }
+
+  this.updateImage = async () => {
+    const id = this.id
+    try {
+      const [profile_id] = await connection('profiles')
+        .returning('profile_id')
+        .update({
+          image: this.image
         })
         .whereRaw('profile_id = (?)', id)
 

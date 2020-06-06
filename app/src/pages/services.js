@@ -9,7 +9,8 @@ export default { pages:
       invitations: { method: 'get', url: 'invitations' },
       acceptInvite: { method: 'post', url: 'acceptInvite' },
       rejectInvite: { method: 'post', url: 'rejectInvite' },
-      config: { method: 'post', url: 'config' }
+      config: { method: 'post', url: 'config' },
+      uploadImageProfile: {method: 'post', url: 'uploadImageProfile' }
     }
   }
   

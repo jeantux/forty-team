@@ -27,6 +27,19 @@ export default {
             .catch(err => {
                 res.status(500).send( { message: 'Fail to set perfil data.' } )
             })
+    },
+    uploadImage(req, res) {
+      const profileModel = new Profile(req.data.user.user_id)
+      profileModel.image = req.file.path
+
+      profileModel.updateImage()
+          .then(() => {
+              res.status(200).send( { message: 'success' } )
+          })
+          .catch(err => {
+              res.status(500).send( { message: 'Fail to set perfil data.' } )
+          })
+      
     }
 }
 

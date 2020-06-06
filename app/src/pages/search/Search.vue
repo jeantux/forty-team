@@ -26,7 +26,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="mr-2">
-                                    <img class="rounded-circle" width="45" :src="user.image ? user.image : 'images/icon-user-default.png'" alt="">
+                                    <img class="rounded-circle" width="45" :src="user.image ? getUrlImage(user.image) : 'images/icon-user-default.png'" alt="">
                                 </div>
                                 <div class="ml-2">
                                     <div class="h5 m-0">{{ user.name }}</div>
@@ -73,6 +73,9 @@ export default {
         signOut () {
             this.ActionSignOut()
             this.$router.push({ name: 'login' })
+        },
+        getUrlImage(urlImage) {
+            return process.env.VUE_APP_ROOT_API +'/'+ urlImage
         },
         authenticateUser() {
             const dataAuth = {

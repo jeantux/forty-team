@@ -15,11 +15,15 @@
                 <img
                   type="image"
                   class="image-default"
-                  :src="profile.image ? profile.image : imageDefault"
+                  :class="{'modified': imageModified}"
+                  :src="profile.image ? getUrlImage(profile.image) : imageDefault"
                   v-on:click="loadImage()"
+                  accept="image/png, image/jpeg"
                 />
+                <span v-if="imageModified" class="text-image-modified">Alterada</span>
                 <input
                   type="file"
+                  name="img"
                   id="myFile"
                   style="display: none;"
                   v-on:change="onFileSelected"
@@ -51,6 +55,7 @@
 
 <script>
 import { servicesPages } from '@/http'
+
 export default {
     name: 'Config',
     data () {
@@ -62,7 +67,8 @@ export default {
                 full_name: '',
                 email: ''
             },
-            selectFile: null,
+            selectedFile: null,
+            imageModified: false
         }
     },
     created () {
@@ -73,11 +79,15 @@ export default {
             let inputFile = document.getElementById('myFile')
             inputFile.click()
         },
+        getUrlImage(urlImage) {
+            return process.env.VUE_APP_ROOT_API +'/'+ urlImage
+        },
         goToPage(pageName) {
             this.$router.push({ name: pageName })
         },
         onFileSelected (event) {
-            this.selectFile = event.target.files[0]
+            this.selectedFile = event.target.files[0]
+            this.imageModified = true
         },
 		getDataProfile() {
             servicesPages.pages.profile()
@@ -89,10 +99,18 @@ export default {
             })
         },
         uploadImage() {
+            let formData = new FormData()
+            formData.append('img', this.selectedFile)
 
+            servicesPages.pages.uploadImageProfile(formData)
+            .then(() => window.console.log('done'))
+            .catch(err => {
+                window.console.log(err)
+            })
         },
         saveProfile() {
             const data = this.profile
+
             servicesPages.pages.setProfile( data )
                 .then(() => {
                     this.goToPage('home')
@@ -110,7 +128,12 @@ export default {
 </script>
 
 <style>
-    .image {text-align: center;}
+    .image {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        align-items: center;
+    }
     .image .image-default { 
         display: inline;
         border: 5px #999 solid;
@@ -123,5 +146,12 @@ export default {
     }
     .cursor-pointer {
         cursor: pointer;
+    }
+    .modified {
+        filter: brightness(0.2)
+    }
+    .text-image-modified {
+        position: absolute;
+        color: white;
     }
 </style>

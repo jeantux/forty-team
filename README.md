@@ -23,6 +23,7 @@ Must have installed **postgres** and **redis** on the machine
 
 ### server
   Add postgres configuration data to server <i>/forty-team/server/knexfile.js</i>
+  must be create a folder named **images** in server directory
 ```bash
   npm install
   npx knex migrate:latest

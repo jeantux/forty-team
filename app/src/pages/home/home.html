@@ -4,7 +4,7 @@
       <div id="sidepanel">
         <div id="profile">
           <div class="wrap">
-            <img id="profile-img" :src="profile.image ? profile.image : imageDefaultUser" :class="profile.status" alt="" />
+            <img id="profile-img" :src="profile.image ? getUrlImage(profile.image) : imageDefaultUser" :class="profile.status" alt="" />
             <p> {{ profile.full_name }} </p>
           </div>
         </div>
@@ -26,7 +26,7 @@
                   :class="{'notification' : contact.notification}"
                 >
                 </span>
-                <img :src="contact.picture ? contact.picture : imageDefaultUser" />
+                <img :src="contact.picture ? getUrlImage(contact.picture) : imageDefaultUser" />
                 <div class="meta">
                   <p class="name"> {{ contact.name }} </p>
                   <p class="preview"> {{ contact.description }} </p>
@@ -48,7 +48,7 @@
       </div>
       <div class="content">
         <div class="contact-profile">
-          <img :src="currentState.contact.picture ? currentState.contact.picture : imageDefaultUser"z alt="" />
+          <img :src="currentState.contact.picture ? getUrlImage(currentState.contact.picture) : imageDefaultUser"z alt="" />
           <p class="contact-name"> {{ currentState.contact.name }} </p>
           <p v-if="currentState.contact.typing" class="typing"> ( Digitando ... )</p>
           <div class="text-right mr-4"><a href="#" @click="signOut()" class="text-black">Sair</a></div>
@@ -61,8 +61,8 @@
           </div>
           <ul>
             <li v-for="talk in this.currentState.contact.talks" :key="talk.id" :class="talk.method">
-              <img v-if="talk.method === 'sent'"    :src="profile.img ? profile.img : imageDefaultUser" alt="">
-              <img v-if="talk.method === 'replies'" :src="currentState.contact.picture ? currentState.contact.picture : imageDefaultUser" alt="">
+              <img v-if="talk.method === 'sent'"    :src="profile.image ? getUrlImage(profile.image) : imageDefaultUser" alt="">
+              <img v-if="talk.method === 'replies'" :src="currentState.contact.picture ? getUrlImage(currentState.contact.picture) : imageDefaultUser" alt="">
               <p> {{ talk.message }} </p>
             </li>
           </ul>

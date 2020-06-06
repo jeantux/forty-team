@@ -7,6 +7,7 @@ import preflight from './methods/preflight'
 
 const app = express()
 const server = require('http').createServer(app)
+
 const io = require('socket.io')(server, {
   handlePreflightRequest: (req, res) => {
       const headers = {
@@ -20,6 +21,7 @@ const io = require('socket.io')(server, {
 })
 
 app.use(preflight.setHeaders)
+app.use('/images', express.static(__dirname + '/../images/'))
 
 app.use(Cors({
   allowedHeaders: ['Device', 'Content-Type', 'Authorization', 'Bearer'],
