@@ -38,8 +38,8 @@ Must have installed **postgres** and **redis** on the machine
 ```
 ## Contributors
 
-| [<img src="https://avatars0.githubusercontent.com/u/38164565?s=400&u=d4fb65931ff45a914df31ca97e017bbd7f6bb04d&v=4" width="110"><br><sub>@oLucasPopov</sub>](https://github.com/oLucasPopov) 
-|:---: |
+| [<img src="https://avatars0.githubusercontent.com/u/38164565?s=400&u=d4fb65931ff45a914df31ca97e017bbd7f6bb04d&v=4" width="110"><br><sub>@oLucasPopov</sub>](https://github.com/oLucasPopov) | [<img src="https://avatars0.githubusercontent.com/u/62981669?s=460&u=72a72baee40f5e387a8629b957d0ce5cec385fb9&v=4" width="110"><br><sub>@wesleysaanttoss</sub>](https://github.com/wesleysaanttoss) 
+|:-:|:-:|
 
 ## Autor
 | [<img src="https://avatars3.githubusercontent.com/u/30236552?v=4" width="110"><br><sub>@JeaanCa</sub>](https://github.com/jeaanca) |
