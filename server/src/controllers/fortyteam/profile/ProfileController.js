@@ -1,4 +1,5 @@
 import Profile from '../../../models/fortyteam/profile/profile.js'
+import compressImage from '../../../methods/compressImage.js'
 
 export default {
     getProfile(req, res) {
@@ -29,17 +30,22 @@ export default {
             })
     },
     uploadImage(req, res) {
-      const profileModel = new Profile(req.data.user.user_id)
-      profileModel.image = req.file.path
 
-      profileModel.updateImage()
-          .then(() => {
-              res.status(200).send( { message: 'success' } )
-          })
-          .catch(err => {
-              res.status(500).send( { message: 'Fail to set perfil data.' } )
-          })
-      
+      compressImage.compressImage(req.file, 120)
+      .then(newPath => {
+        const profileModel = new Profile(req.data.user.user_id)
+        profileModel.image = newPath
+  
+        profileModel.updateImage()
+            .then(() => {
+                res.status(200).send( { message: 'success' } )
+            })
+            .catch(err => {
+                res.status(500).send( { message: 'Fail to set perfil data.' } )
+            })
+
+       })
+      .catch(err => console.log(err) );      
     }
 }
 

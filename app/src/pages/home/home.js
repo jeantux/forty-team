@@ -189,42 +189,42 @@ data () {
     getDataProfile() {
       servicesPages.pages.profile()
             .then(res => {
-        this.profile = res.data.profile
+              this.profile = res.data.profile
             })
             .catch(err => {
-                console.log(err)
+              console.log(err)
             })
     },
     getContacts() {
       this.contacts = []
       this.allContacts = []
       servicesPages.pages.contactslist()
-            .then(res => {
+      .then(res => {
         this.allContacts = res.data.contacts
-        this.loadAllContacts()
-            })
-            .catch(err => {
-                console.log(err)
-            })
+          this.loadAllContacts()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     getMessages(contact, callBackFunction) {
       this.talks = []
       servicesPages.pages.messages({contactId: contact.id_contact})
-            .then(res => {
+      .then(res => {
         contact.talks = res.data.talks
 
         if (callBackFunction)
           callBackFunction()
 
         this.scrollEnd()
-            })
-            .catch(err => {
-                console.log(err)
+      })
+      .catch(err => {
+        console.log(err)
       })
     },
     newMessage() {
       if (this.currentState.message.trim() == '') {
-                return false;
+        return false;
       }
 
       if (Object.keys(this.currentState.contact).length === 0) {
