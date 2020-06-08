@@ -8,48 +8,48 @@
             </div>
         </nav>
 
-        <h1 class="mt-1 ml-3"> Configurações </h1>
-        <h2 class="mt-1 ml-4">profile</h2>
-        <form class="mt-1 mx-5">
-            <div class="image">
-                <img
-                  type="image"
-                  class="image-default"
-                  :class="{'modified': imageModified}"
-                  :src="profile.image ? getUrlImage(profile.image) : imageDefault"
-                  v-on:click="loadImage()"
-                  accept="image/png, image/jpeg"
-                />
-                <span v-if="imageModified" class="text-image-modified">Alterada</span>
-                <input
-                  type="file"
-                  name="img"
-                  id="myFile"
-                  style="display: none;"
-                  v-on:change="onFileSelected"
-                />
-            </div>
+        <div class="configurations">
+            <form class="form-data mt-1 mx-5">
+                <h4 class="title-configs"> Configurações </h4>
+                <div class="image">
+                    <img
+                    type="image"
+                    class="image-default"
+                    :class="{'modified': imageModified}"
+                    :src="profile.image ? getUrlImage(profile.image) : imageDefault"
+                    v-on:click="loadImage()"
+                    accept="image/png, image/jpeg"
+                    />
+                    <span v-if="imageModified" class="text-image-modified">Alterada</span>
+                    <input
+                    type="file"
+                    name="img"
+                    id="myFile"
+                    style="display: none;"
+                    v-on:change="onFileSelected"
+                    />
+                </div>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input v-model="profile.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-                <small id="emailHelp" class="form-text text-muted">Deixe sua conta mais segura.</small>
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input v-model="profile.email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                    <small id="emailHelp" class="form-text text-muted">Deixe sua conta mais segura.</small>
+                </div>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Nome</label>
-                <input v-model="profile.full_name" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Nome Completo">
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nome</label>
+                    <input v-model="profile.full_name" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder="Nome Completo">
+                </div>
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Status</label>
-                <input v-model="profile.description" type="text" class="form-control" id="status" aria-describedby="emailHelp" placeholder="Adicione uma descrição aqui ...">
-                <small id="status" class="form-text text-muted">Será exibido junto com seu profile.</small>
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Status</label>
+                    <input v-model="profile.description" type="text" class="form-control" id="status" aria-describedby="emailHelp" placeholder="Adicione uma descrição aqui ...">
+                    <small id="status" class="form-text text-muted">Será exibido junto com seu profile.</small>
+                </div>
 
-            <button v-on:click="save" class="btn btn-primary">Salvar</button>
-        </form>
-
+                <button v-on:click="save" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -134,6 +134,21 @@ export default {
 </script>
 
 <style>
+    .title-configs {
+        border-bottom: 1px solid;
+        color: #666;
+        margin-bottom: 20px;
+    }
+    .configurations {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .form-data {
+        width: 500px;
+    }
     .image {
         display: flex;
         justify-content: center;
@@ -159,5 +174,11 @@ export default {
     .text-image-modified {
         position: absolute;
         color: white;
+    }
+
+    @media screen and (max-width: 500px)  {
+        .form-data {
+            width: 100%;
+        }
     }
 </style>
