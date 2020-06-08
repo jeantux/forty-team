@@ -55,6 +55,7 @@
 
 <script>
 import { servicesPages } from '@/http'
+import { mapActions } from 'vuex'
 
 export default {
     name: 'Config',
@@ -75,6 +76,11 @@ export default {
         this.getDataProfile()
     },
     methods: {
+       ...mapActions('auth', ['ActionSignOut']),
+        signOut () {
+            this.ActionSignOut()
+            this.$router.push({ name: 'login' })
+        },
         loadImage () {
             let inputFile = document.getElementById('myFile')
             inputFile.click()

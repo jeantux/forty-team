@@ -23,11 +23,11 @@ data () {
   }
 },
   created() {
-      this.getContacts()
-  this.getDataProfile()
-  this.authenticateUser()
-  this.socketsEvents()
-  this.getInvitations()
+    this.getContacts()
+    this.getDataProfile()
+    this.authenticateUser()
+    this.socketsEvents()
+    this.getInvitations()
   },
   methods: {
     ...mapActions('auth', ['ActionSignOut']),
