@@ -19,7 +19,8 @@ data () {
     allContacts: [],
     contacts: [],
     profile: {},
-    socket: io(process.env.VUE_APP_ROOT_API)
+    socket: io(process.env.VUE_APP_ROOT_API),
+    numberNotifications: 0
   }
 },
   created() {
@@ -37,7 +38,6 @@ data () {
     },
     notity() {
       let audio = new Audio('audio/notify-001.mp3');
-      window.console.log(audio)
       audio.addEventListener('canplaythrough', function() {
           window.console.log('deu play')
           audio.play();
@@ -119,6 +119,13 @@ data () {
         document.querySelector(".messages").scrollTop = document.querySelector(".messages").scrollHeight !== null ? document.querySelector(".messages").scrollHeight : 0
       })
     },
+    updateTitle() {
+      if (this.numberNotifications > 0) {
+        document.title = `(${this.numberNotifications}) - FortyTeam`
+      } else {
+        document.title = `FortyTeam`
+      }
+    },
     socketsEvents() {
       this.socket.on('messages', data => {
         for (const key in this.contacts) {
@@ -136,6 +143,8 @@ data () {
             } else {
               this.notity()
               currentContact.notification = true
+              this.numberNotifications ++
+              this.updateTitle()
             }
           }
         }
@@ -180,8 +189,14 @@ data () {
       if (!contact.invitation) {
         if (!contact.talks.length) {
           this.getMessages(contact)
+        }        
+
+        if (contact.notification) {
+          this.numberNotifications = 0
+          this.updateTitle()
+          contact.notification = false
         }
-        contact.notification = false
+
       }
       this.currentState.contact = contact
       this.scrollEnd()      
