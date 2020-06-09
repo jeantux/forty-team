@@ -4,7 +4,7 @@
   "description": "API - FortyTeam",
   "main": "src/app.js",
   "scripts": {
-    "start": "node_modules/.bin/nodemon src/app.js --exec babel-node --",
+    "start": "node_modules/.bin/nodemon src/app.js --exec babel-node --trace-warnings",
     "clean": "rm -rf build && mkdir build",
     "prebuild": "babel -d ./build ./src -s --presets env",
     "build": "npm run clean && npm run prebuild"
@@ -29,7 +29,7 @@
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.2",
-    "pg": "^7.18.2",
+    "pg": "^8.2.1",
     "redis": "^3.0.2",
     "sharp": "^0.25.3",
     "socket.io": "^2.3.0"
