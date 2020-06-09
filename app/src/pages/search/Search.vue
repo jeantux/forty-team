@@ -18,26 +18,28 @@
 		</div>
     </nav>
 
-    <div class="container-fluid gedf-wrapper">
-        <div class="row">
-            <div class="col">
-                <div class="card gedf-card" v-for="user in users" :key="user.name">
-                    <div class="card-header bg-ligth-card">
-                        <div class="d-flex justify-content-between align-items-center">
+    <div class="search">
+        <div class=" list-users container-fluid gedf-wrapper">
+            <div class="row">
+                <div class="col">
+                    <div class="card gedf-card" v-for="user in users" :key="user.name">
+                        <div class="card-header bg-ligth-card">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" :src="user.image ? getUrlImage(user.image) : 'images/icon-user-default.png'" alt="">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                        <img class="rounded-circle" width="45" :src="user.image ? getUrlImage(user.image) : 'images/icon-user-default.png'" alt="">
+                                    </div>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0">{{ user.name }}</div>
+                                        <div class="h7 text-muted mb-2">{{ user.description }}</div>
+                                        <div v-show="user.mycontact" class="tag-friends text-center">Amigos</div>
+                                        <div v-show="user.invitepending" class="tag-pending text-center">Pendente</div>
+                                    </div>
                                 </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">{{ user.name }}</div>
-                                    <div class="h7 text-muted mb-2">{{ user.description }}</div>
-                                    <div v-show="user.mycontact" class="tag-friends text-center">Amigos</div>
-                                    <div v-show="user.invitepending" class="tag-pending text-center">Pendente</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">       
-                                    <a v-show="!user.mycontact && !user.invitepending" v-on:click="addUser(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-user-plus"></i></a>
+                                <div>
+                                    <div class="dropdown">       
+                                        <a v-show="!user.mycontact && !user.invitepending" v-on:click="addUser(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-user-plus"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -121,6 +123,18 @@ button {border-radius: 5px; background-color: #3f5fc7;}
 .input-search input {border: none; width: 100%; background: transparent; padding-left: 10px;}
 .input-search input:focus {border: none; outline: none;}
 .topbar{box-shadow: #eee 1px 1px 2px 1px;}
+
+.search {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.list-users {
+    width: 800px;
+}
 
 .card-link {
     background: #e5e7fa;

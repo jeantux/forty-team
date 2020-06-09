@@ -147,7 +147,7 @@ export default {
         justify-content: center;
     }
     .form-data {
-        width: 500px;
+        width: 600px;
     }
     .image {
         display: flex;
@@ -176,7 +176,7 @@ export default {
         color: white;
     }
 
-    @media screen and (max-width: 500px)  {
+    @media screen and (max-width: 600px)  {
         .form-data {
             width: 100%;
         }
