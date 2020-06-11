@@ -1,57 +1,63 @@
-const knex = require('../../../database/connection.js')
+// import connection from '../../../database/connection.js'
 
-function Invitations(id) {
-  this.id          = id === undefined ? -1 : id
-  this.contact_id  = 0
+const connection = require('../../../database/connection.js')
 
-  this.getInvitations = () => {
+function Invitations(id = -1) {
+  this.id = id
+  this.contact_id = 0
+
+  this.getInvitations = async () => {
     const id = this.id
-    return new Promise(async (resolve, reject) => {
-        knex
-        .from("invitations")
-        .select("contact_id")
-        .where('user_id', '=', id)
-        .then(profile => resolve( profile ))
-        .catch(() => reject({ id: 0, msg: 'Error to select invitations!' }))
-    })
+
+    try {
+      const profile = await connection('invitations')
+        .select('contact_id')
+        .where('user_id', id)
+      return Promise.resolve(profile)
+    } catch (e) {
+      return Promise.reject({ id: 0, msg: 'Error selecting invitations!' })
+    }
+
   }
 
-  this.getInvitationsDetailed = () => {
+  this.getInvitationsDetailed = async () => {
     const id = this.id
-    return new Promise(async (resolve, reject) => {
-        knex
-        .from("accounts as a")
-        .leftJoin("profiles as p", "p.profile_id", "a.profile_id")
-        .leftJoin("invitations as i", "i.contact_id", "a.user_id")
-        .select("i.contact_id", "p.full_name as name", "p.description", "p.image as picture")
-        .where('i.user_id', '=', id)
-        .then(profile => resolve( profile ))
-        .catch(() => reject({ id: 0, msg: 'Error to select invites deteiled!' }))
-    })    
+    try {
+      const profile = await connection('accounts')
+        .leftJoin('profiles', 'profiles.profile_id', 'accounts.profile_id')
+        .leftJoin('invitations', 'invitations.contact_id', 'accounts.user_id')
+        .select('invitations.contact_id', 'profiles.full_name as name', 'profiles.description', 'profiles.image as picture')
+        .where('invitations.user_id', '=', id)
+
+      return Promise.resolve(profile)
+    } catch (e) {
+      return Promise.reject({ id: 0, msg: 'Error selecting detailed invitations' })
+    }
+
   }
 
-  this.remove = (idContact) => {
-    return new Promise( async (resolve, reject) => {
-      knex('invitations')
-      .where('user_id', '=', id)
-      .andWhere('contact_id', '=', idContact)
-      .del()
-      .then(() => resolve({ status: true }) )
-      .catch(() => reject({ status: false }))
-    })
+  this.remove = async (idContact) => {
+    try {
+      await connection('invitations')
+        .where('user_id', id)
+        .andWhere('contact_id', idContact)
+        .delete()
+      return Promise.resolve({ status: true })
+    } catch (e) {
+      return Promise.reject({ status: false })
+    }
   }
 
-  this.register = () => {
-    return new Promise( async (resolve, reject) => {
-      knex
-      .insert({
+  this.register = async () => {
+    try {
+      await connection('invitations').insert({
         contact_id: this.contact_id,
         user_id: this.id
       })
-      .into("invitations")
-      .then(() => resolve({ status: true })) 
-      .catch(() => reject({ msg: 'Error to execute insert in invitations!' }))
-    })
+      return Promise.resolve({ status: true })
+    } catch (e) {
+      return Promise.reject({ msg: 'Error inserting invitations!' })
+    }
   }
 }
 
