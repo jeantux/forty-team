@@ -60,12 +60,15 @@ export default {
   methods: {
     validations () {
       if (!this.form.username.trim()) {
-          toast.toastError('O username é obrigatório!')
-          return false
+        toast.toastError('O username é obrigatório!')
+        return false
       } 
       else if (this.form.password !== this.form.confirmPassword) {
-          toast.toastError('As Senhas são incompatíveis!')
-          return false
+        toast.toastError('As Senhas são incompatíveis!')
+        return false
+      } if (!this.form.username.indexOf(' ') > -1) {
+        toast.toastError('O username não pode possuir espaçoes em branco!')
+        return false
       } else {
         return true
       }
