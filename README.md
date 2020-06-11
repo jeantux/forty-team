@@ -19,9 +19,11 @@ Clone this repo to your local machine using https://github.com/jeaanca/forty-tea
 cd forty-team <br>
 
 ## Configuration 
-Must have installed **postgres** and **redis** on the machine
+Must have installed [**postgres**](https://www.postgresql.org/download/) and [**redis**](https://redis.io/download) on the machine
 
 ### server
+  cp .env.example .env <br>
+  In the .env file add the key that will be used in the JWT.
   Add postgres configuration data to server <i>/forty-team/server/knexfile.js</i>
   must be create a folder named **images** in server directory
 ```bash
@@ -31,7 +33,7 @@ Must have installed **postgres** and **redis** on the machine
 ```
 ### app  
   cp .env.example .env <br>
-  In the .env file add the key that will be used in the JWT.
+  In the .env file add the url to API.
 ```bash  
   npm install
   npm run serve
