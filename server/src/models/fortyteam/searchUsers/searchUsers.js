@@ -1,7 +1,4 @@
-const { Client } = require('pg')
-import configConnection from '../../../connections/config-pg'
 const connection = require('../../../database/connection')
-
 
 function SearchUsers(id = -1, textSearch = '') {
   this.id = id

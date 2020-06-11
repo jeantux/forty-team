@@ -1,6 +1,4 @@
-import configConnection from '../../../connections/config-pg'
 import Profile from '../profile/profile'
-const { Client } = require('pg')
 const crypt = require('../../../methods/crypt.js')
 const connection = require('../../../database/connection')
 
