@@ -19,7 +19,7 @@ function Auth() {
             this.where({ user_id: userId })
           }
         })
-      if (auth.length >= 0) {
+      if (auth.length > 0) {
         const user = auth[0]
         return Promise.resolve({ user })
       } else {
