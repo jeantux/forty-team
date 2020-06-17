@@ -4,6 +4,6 @@ server/node_modules
 server/.env
 server/package-lock.json
 server/build
-server/knexfile.js
 server/images
 server/src/connections/config-pg.js
+server/knexfile.js
