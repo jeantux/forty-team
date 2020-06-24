@@ -1,3 +1,14 @@
+$primary-color: #673ab7;
+$primary-light: #9a67ea;
+$primary-dark: #320b86;
+$secondary-color: #4527a0;
+$secondary-light: #7953d2;
+$secondary-dark: #000070;
+$white: #fff;
+$light-gray: #f5f5f6; 
+$md-gray: #e1e2e1;
+$dark-gray: #343a40;
+
 body {
     display: flex;
     align-items: center;
@@ -15,7 +26,7 @@ body {
 
 ul {
   list-style-type: none;
-  margin-left: -38px;
+  left:-40px;
 }
 
 div#app {
@@ -25,52 +36,55 @@ div#app {
 #frame {
   width: 100%;
   height: 100vh;
-  background: #E6EAEA;
 }
-// @media screen and (max-width: 360px) {
-//   #frame {
-//     width: 100%;
-//     height: 100vh;
-//   }
-// }
+
+@media screen and (max-width: 360px) {
+  #frame {
+    width: 100%;
+    height: 100vh;
+  }
+}
 #frame #sidepanel {
-  // display: flex;
-  // flex-direction: column;
+  display: flex;
+  flex-direction: column;
   align-items: flex-start;
   float: left;
   min-width: 280px;
-  max-width: 340px;
+  max-width: 400px;
   width: 40%;
   height: 100%;
-  background: #ffffff;
+  background: $light-gray;
   color: #475356;
   overflow: hidden;
   position: relative;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel {
-//     width: 58px;
-//     min-width: 58px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel {
+    width: 58px;
+    min-width: 58px;
+  }
+}
 #frame #sidepanel #profile {
   width: 100%;
-  padding: 15px 15px;
+  padding: 60px;
+  padding: 0 5px;
+  background-color: $primary-dark;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile {
-//     width: 100%;
-//     margin: 0 auto;
-//     padding: 5px 0 0 0;
-//     background: #ffffff;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile {
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px 0 0 0;
+    background: #ffffff;
+  }
+}
 #frame #sidepanel #profile.expanded .wrap {
   height: 210px;
   line-height: initial;
 }
 #frame #sidepanel #profile.expanded .wrap p {
   margin-top: 20px;
+  color: $white;
 }
 #frame #sidepanel #profile.expanded .wrap i.expand-button {
   -moz-transform: scaleY(-1);
@@ -92,42 +106,42 @@ div#app {
   -webkit-transition: 0.3s height ease;
   transition: 0.3s height ease;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap {
-//     height: 55px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap {
+    height: 55px;
+  }
+}
 #frame #sidepanel #profile .wrap img {
   width: 50px;
   border-radius: 50%;
   padding: 3px;
-  border: 2px solid #eaeaea;
+  // border: 2px solid #eaeaea;
   height: auto;
-  float: left;
   cursor: pointer;
   -moz-transition: 0.3s border ease;
   -o-transition: 0.3s border ease;
   -webkit-transition: 0.3s border ease;
   transition: 0.3s border ease;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap img {
-//     width: 40px;
-//     margin-left: 4px;
-//   }
-// }
-#frame #sidepanel #profile .wrap img.notification {
-  border: 2px solid #2ecc71;
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap img {
+    width: 40px;
+    margin-left: 4px;
+  }
 }
+// #frame #sidepanel #profile .wrap img.notification {
+//   border: 2px solid #2ecc71;
+// }
 #frame #sidepanel #profile .wrap p {
   float: left;
   margin:0 0 0 15px;
+  color: $light-gray;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap p {
-//     display: none;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap p {
+    display: none;
+  }
+}
 #frame #sidepanel #profile .wrap i.expand-button {
   float: right;
   margin-top: 23px;
@@ -135,11 +149,11 @@ div#app {
   cursor: pointer;
   color: #ffffff;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap i.expand-button {
-//     display: none;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap i.expand-button {
+    display: none;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options {
   position: absolute;
   opacity: 0;
@@ -155,22 +169,22 @@ div#app {
   -webkit-transition: 0.3s all ease;
   transition: 0.3s all ease;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap #status-options {
-//     width: 58px;
-//     margin-top: 57px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap #status-options {
+    width: 58px;
+    margin-top: 57px;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options.active {
   opacity: 1;
   visibility: visible;
   margin: 75px 0 0 0;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap #status-options.active {
-//     margin-top: 62px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap #status-options.active {
+    margin-top: 62px;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options:before {
   content: '';
   position: absolute;
@@ -181,11 +195,11 @@ div#app {
   border-bottom: 8px solid #ffffff;
   margin: -8px 0 0 24px;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap #status-options:before {
-//     margin-left: 23px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap #status-options:before {
+    margin-left: 23px;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options ul {
   overflow: hidden;
   border-radius: 6px;
@@ -195,11 +209,11 @@ div#app {
   display: block;
   cursor: pointer;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap #status-options ul li {
-//     padding: 15px 0 35px 22px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap #status-options ul li {
+    padding: 15px 0 35px 22px;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options ul li:hover {
   background: #496886;
 }
@@ -210,12 +224,12 @@ div#app {
   border-radius: 50%;
   margin: 5px 0 0 0;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
-//     width: 14px;
-//     height: 14px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+    width: 14px;
+    height: 14px;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
   content: '';
   position: absolute;
@@ -226,20 +240,20 @@ div#app {
   border-radius: 50%;
   z-index: 0;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
-//     height: 18px;
-//     width: 18px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+    height: 18px;
+    width: 18px;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options ul li p {
   padding-left: 12px;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #profile .wrap #status-options ul li p {
-//     display: none;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap #status-options ul li p {
+    display: none;
+  }
+}
 #frame #sidepanel #profile .wrap #status-options ul li#status-notification span.status-circle {
   background: #2ecc71;
 }
@@ -282,49 +296,62 @@ div#app {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 1.30rem;
+  font-size: 1.5rem;
   margin: 0 auto;
   width: 30px;
   height: 30px;
-  color: #2e8ac9;
+  color: $light-gray;
   transition: ease-in-out 250ms;
 }
 
 #frame #sidepanel #profile .wrap .btns i:hover{
-  color:#212529;
+  color: $dark-gray;
 }
 
+// SEARCH
+
 #frame #sidepanel #search {
+  width: 100%;
+}
+
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #search {
+    display: none;
+  }
+}
+
+#frame #sidepanel #search label {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 3%;
+  padding: 0 0 0 10px;
+  margin: 0 auto;
+  height: 50px;
+  background-color: $light-gray;
+  border-bottom: 1px solid $white;
   font-weight: 300;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #search {
-//     display: none;
-//   }
-// }
-#frame #sidepanel #search label {
-  position: absolute;
-  margin: 0 20px;
+
+#frame #sidepanel #search label i {
+  margin: 0 10px;
+  font-size: 1.5rem;
 }
-#frame #sidepanel #search input {
+
+#frame #sidepanel #search label input {
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
-  padding: 10px 0 10px 60px;
-  border-radius: 25px;
+  border-radius: none;
   width: 100%;
+  height: 40px;
   border: none;
-  background: #f9f9f9;
-  color: #475356;
+  background: none;
+  color: $dark-gray;
 }
-#frame #sidepanel #search input:focus {
-  outline: none;
-  background: #ebebeb;
+#frame #sidepanel #search input:focus  {
+  outline: none;  
 }
+
 #frame #sidepanel #search input::-webkit-input-placeholder {
-  color: #475356;
+  color: $dark-gray;
 }
 #frame #sidepanel #search input::-moz-placeholder {
   color: #475356;
@@ -335,73 +362,88 @@ div#app {
 #frame #sidepanel #search input:-moz-placeholder {
   color: #475356;
 }
+
+// CONTATOS
+
 #frame #sidepanel #contacts {
-  padding: 10px 0;
-  height: calc(100% - 177px);
+  width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+ }
+
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #contacts {
+    height: calc(100% - 149px);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  #frame #sidepanel #contacts::-webkit-scrollbar {
+    display: none;
+    background: #ffffff;
+  }
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #contacts {
-//     height: calc(100% - 149px);
-//     overflow-y: hidden;
-//     overflow-x: hidden;
-//   }
-//   #frame #sidepanel #contacts::-webkit-scrollbar {
-//     display: none;
-//     background: #ffffff;
-//   }
-// }
+
 #frame #sidepanel #contacts.expanded {
   height: calc(100% - 334px);
 }
+
 #frame #sidepanel #contacts::-webkit-scrollbar {
   width: 8px;
   background: #e6eaea;
 }
+
 #frame #sidepanel #contacts::-webkit-scrollbar-thumb {
   background-color: #243140;
 }
 
 #frame #sidepanel #contacts ul {
-  margin-bottom: 0;
-  
+  position: relative;
 }
 
 #frame #sidepanel #contacts ul li.contact {
-  position: relative;
-  font-size: 0.9em;
+  width: 400px;
+  height: 75px;
+  font-size: 1rem;
   cursor: pointer;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #contacts ul li.contact {
-//     padding: 6px 0 46px 8px;
-//   }
-// }
-#frame #sidepanel #contacts ul li.contact:hover {
-  background: #ffffff;
+
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #contacts ul li.contact {
+    padding: 6px 0 46px 8px;
+  }
 }
+
+#frame #sidepanel #contacts ul li.contact:hover {
+  background: $md-gray;
+  color: $dark-gray;
+}
+
 #frame #sidepanel #contacts ul li.contact.active {
   background: #ffffff;
   border-right: 5px solid #ffffff;
 }
+
 #frame #sidepanel #contacts ul li.contact.active span.contact-status {
   border: 2px solid #ffffff;
 }
+
 #frame #sidepanel #contacts ul li.contact .wrap {
   display: flex;
   align-items: center;
   padding: 10px 15px;
-  width: 100%;
-  height: 55px;
-  position: relative;
+  width: 400px;
+  height: 75px;
+  margin: 0;
+  left: 0;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #contacts ul li.contact .wrap {
-//     width: 100%;
-//     height: auto;
-//   }
-// }
+
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #contacts ul li.contact .wrap {
+    width: 100%;
+    height: auto;
+  }
+}
+
 #frame #sidepanel #contacts ul li.contact .wrap span.notification {
   position: absolute;
   right: 10px;
@@ -416,19 +458,19 @@ div#app {
   border-radius: 50%;
 }
 
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #contacts ul li.contact .wrap img {
-//     margin-right: 0px;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #contacts ul li.contact .wrap img {
+    margin-right: 0px;
+  }
+}
 #frame #sidepanel #contacts ul li.contact .wrap .meta {
   padding: 0 15px;
 }
-// @media screen and (max-width: 735px) {
-//   #frame #sidepanel #contacts ul li.contact .wrap .meta {
-//     display: none;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame #sidepanel #contacts ul li.contact .wrap .meta {
+    display: none;
+  }
+}
 #frame #sidepanel #contacts ul li.contact .wrap .meta .name {
   font-weight: 600;
   margin-bottom: 0;
@@ -437,7 +479,6 @@ div#app {
   margin-left: 50px;
   margin-top: -20px;
   color: #888;
-
   padding: 0 0 1px;
   font-weight: 400;
   white-space: nowrap;
@@ -458,40 +499,52 @@ div#app {
   opacity: .5;
 }
 
+// CONTENT
+
 #frame .content {
   float: right;
-  width: 60%;
   height: 100%;
   overflow: hidden;
   position: relative;
-  background: #e4ebf3;
 }
-// @media screen and (max-width: 735px) {
-//   #frame .content {
-//     width: calc(100% - 58px);
-//     min-width: 300px !important;
-//   }
-// }
+@media screen and (max-width: 735px) {
+  #frame .content {
+    width: calc(100% - 58px);
+    min-width: 300px !important;
+  }
+}
 @media screen and (min-width: 900px) {
   #frame .content {
-    width: calc(100% - 340px);
+    width: calc(100% - 400px);
   }
 }
 #frame .content .contact-profile {
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 60px;
-  line-height: 60px;
-  background: #e4ebf3;
+  padding: 15px;
+  background: $primary-dark;
+  border-left: 1px solid $primary-color;
 }
 #frame .content .contact-profile img {
-  width: 40px;
+  width: 50px;
+  padding: 3px;
   border-radius: 50%;
-  float: left;
-  margin: 9px 12px 0 9px;
 }
+
 #frame .content .contact-profile p {
-  float: left;
+  color: $white;
+  margin: 0 0 0 15px;
 }
+
+#frame .content .contact-profile i {
+  cursor: pointer;
+  color: $white;
+  position: absolute;
+  right: 25px;
+}
+
 #frame .content .contact-profile .social-media {
   float: right;
 }
@@ -505,11 +558,14 @@ div#app {
 #frame .content .contact-profile .social-media i:hover {
   color: #ffffff;
 }
+
+// MESSAGES 
+
 #frame .content .messages {
   height: auto;
   min-height: calc(100% - 120px);
   max-height: calc(100% - 120px);
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   background: #efeeee;
   width: 100%;
@@ -528,8 +584,7 @@ div#app {
 }
 #frame .content .messages ul li {
   display: inline-block;
-  // clear: both;
-  // float: left;
+  clear: both;
   margin: 15px 15px 5px 15px;
   width: calc(100% - 25px);
   font-size: 0.9em;
@@ -570,27 +625,36 @@ div#app {
     max-width: 300px;
   }
 }
+
+// MENSSAGE INPUT
+
 #frame .content .message-input {
-  position: absolute;
-  bottom: 0;
   width: 100%;
-  z-index: 99;
+  height: 60px;
 }
-#frame .content .message-input .wrap {
-  position: relative;
+
+#frame .content .message-input .wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 60px;
+  background-color: $md-gray;
 }
+
 #frame .content .message-input .wrap textarea {
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
-  float: left;
   border: none;
-  width: calc(100% - 70px);
+  background: none;
+  width: 90%;
   margin-left: 10px;
   padding: 11px 32px 10px 8px;
-  font-size: 0.8em;
-  color: #1a0338;
+  font-size: 1em;
+  color: $dark-gray;
   border-radius: 5px;
   resize: none;
   height: 40px;
+  overflow-y: hidden;
 }
 @media screen and (max-width: 735px) {
   #frame .content .message-input .wrap textarea {
@@ -619,25 +683,18 @@ div#app {
 #frame .content .message-input .wrap .attachment:hover {
   opacity: 1;
 }
-#frame .content .message-input .wrap button {
-  float: right;
-  border: none;
-  width: 50px;
-  padding: 8px 0;
+#frame .content .message-input .wrap i {
   cursor: pointer;
-  background: #ffffff;
-  color: #475356;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  margin-right: 5px;
+  color: $dark-gray;
+  font-size: 2rem;
 }
 @media screen and (max-width: 735px) {
-  #frame .content .message-input .wrap button {
+  #frame .content .message-input .wrap i {
     padding: 16px 0;
   }
 }
-#frame .content .message-input .wrap button:hover {
-  background: #ffffff;
+#frame .content .message-input .wrap i:hover {
+  color: $dark-gray;
 }
 #frame .content .message-input .wrap button:focus {
   outline: none;
@@ -653,8 +710,6 @@ div#app {
 }
 
 .invitation button {
-  width: 100px;
-  height: 30px;
   border: 1px solid transparent;
   border-radius: 50px;
   display: inline;
