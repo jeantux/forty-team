@@ -1,49 +1,46 @@
 <div class="home">
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+    <!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <div id="frame">
       <div id="sidepanel">
         <div id="profile">
           <div class="wrap">
             <img id="profile-img" :src="profile.image ? getUrlImage(profile.image) : imageDefaultUser" :class="profile.status" alt="" />
             <p> {{ profile.full_name }} </p>
+            <div class="btns">
+              <i id="addcontact" v-on:click="goToPage('search')" class="material-icons" aria-hidden="true">person_add</i>
+              <i v-on:click="goToPage('config')" class="material-icons" aria-hidden="true">settings</i>
+            </div>
           </div>
         </div>
         <div id="search">
-          <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input
-            v-model="currentState.searchContacts"
-            type="text"
-            placeholder="Buscar contatos..."
-            v-on:keyup="searchInContacs()"
-          />
+          <label for="">
+            <i class="material-icons" aria-hidden="true">search</i>
+            <input
+              v-model="currentState.searchContacts"
+              type="text"
+              placeholder="Buscar contatos..."
+              v-on:keyup="searchInContacs()"
+            />
+          </label>
         </div>
         <div id="contacts">
           <ul>
             <li v-for="contact in contacts" :key="contact.name" class="contact">
               <div class="wrap" v-on:click="changeTalk(contact)">
-                <span
-                  class="contact-status"
-                  :class="{'notification' : contact.notification}"
-                >
-                </span>
                 <img :src="contact.picture ? getUrlImage(contact.picture) : imageDefaultUser" />
                 <div class="meta">
                   <p class="name"> {{ contact.name }} </p>
                   <p class="preview"> {{ contact.description }} </p>
                 </div>
+                <span
+                  class="contact-status"
+                  :class="{'notification' : contact.notification}"
+                >
+                </span>
               </div>
             </li>
           </ul>
-        </div>
-        <div id="bottom-bar">
-          <button id="addcontact" v-on:click="goToPage('search')">
-            <i class="fa fa-users fa-fw" aria-hidden="true"></i>
-            <span>Pesquisar contatos</span>
-          </button>
-          <button v-on:click="goToPage('config')">
-            <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
-            <span>Configurações</span>
-          </button>
         </div>
       </div>
       <div class="content">
@@ -51,7 +48,7 @@
           <img :src="currentState.contact.picture ? getUrlImage(currentState.contact.picture) : imageDefaultUser"z alt="" />
           <p class="contact-name"> {{ currentState.contact.name }} </p>
           <p v-if="currentState.contact.typing" class="typing"> ( Digitando ... )</p>
-          <div class="text-right mr-4"><a href="#" @click="signOut()" class="text-black">Sair</a></div>
+          <i href="#" @click="signOut()" class="material-icons">close</i>
         </div>
         <div class="messages">
           <div v-if="currentState.contact.invitation" class="invitation">
@@ -77,7 +74,7 @@
               @keypress="sendTyping()"
             >
             </textarea>
-            <button v-on:click="newMessage()" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            <i v-on:click="newMessage()" class="material-icons submit" aria-hidden="true">send</i>
           </div>
         </div>
       </div>
