@@ -66,7 +66,7 @@ export default {
       else if (this.form.password !== this.form.confirmPassword) {
         toast.toastError('As Senhas são incompatíveis!')
         return false
-      } if (!this.form.username.indexOf(' ') > -1) {
+      } if (this.form.username.indexOf(' ') > -1) {
         toast.toastError('O usuário não pode possuir espaços em branco!')
         return false
       } else {
