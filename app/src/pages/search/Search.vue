@@ -1,21 +1,20 @@
 <template>
   <div class="search-app">
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-    <nav class="navbar navbar-light bg-white mb-4 topbar">
-        <a v-on:click="goToPage('home')" class="menu-back navbar-brand"><i class="fa fa-chevron-left"></i></a>
-        <form class="form-inline">
-            <div class="input-group input-search">
-                <input
-                  type="text"
-                  placeholder="Digite o que procura"
-                  v-model="textSearch"
-                  v-on:keyup.enter="searchUser()"
-                >
-            </div>
-		</form>
-		<div class="navbar">
-			<a v-on:click="signOut()" href="#">Sair</a>
-		</div>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <nav class="navbar navbar-light bg-white mb-4">
+        <i v-on:click="goToPage('home')" class="btn-back material-icons">arrow_back</i>
+        <div class="input-search-nav">
+            <form class="form-inline d-flex justify-content-center">
+                <div class="input-group input-search">
+                    <input
+                    type="text"
+                    placeholder="Digite o que procura"
+                    v-model="textSearch"
+                    v-on:keyup.enter="searchUser()"
+                    >
+                </div>
+            </form>
+        </div>
     </nav>
 
     <div class="search">
@@ -32,13 +31,14 @@
                                     <div class="ml-2">
                                         <div class="h5 m-0">{{ user.name }}</div>
                                         <div class="h7 text-muted mb-2">{{ user.description }}</div>
-                                        <div v-show="user.mycontact" class="tag-friends text-center">Amigos</div>
-                                        <div v-show="user.invitepending" class="tag-pending text-center">Pendente</div>
+                                        
                                     </div>
                                 </div>
                                 <div>
                                     <div class="dropdown">       
-                                        <a v-show="!user.mycontact && !user.invitepending" v-on:click="addUser(user)" class="card-link-active text-white cursor-pointer"><i class="fa fa-user-plus"></i></a>
+                                        <i v-show="user.mycontact" class="text-success material-icons schedule">check</i>
+                                        <i v-show="user.invitepending" class="text-warning material-icons check">schedule</i>
+                                        <a v-show="!user.mycontact && !user.invitepending" v-on:click="addUser(user)" class="card-link-active text-primary cursor-pointer"><i class="add material-icons">add</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -118,11 +118,20 @@ export default {
 
 <style>
 button {border-radius: 5px; background-color: #3f5fc7;}
-.bg-ligth-card{background: #ffffff !important;}
-.input-search{border-radius: 5px !important; border: none; background: #f6f6fd; padding: 5px;}
+.bg-ligth-card{background: #ffffff}
+.input-search{border-radius: 5px; border: none; background: #f6f6fd; padding: 5px;}
 .input-search input {border: none; width: 100%; background: transparent; padding-left: 10px;}
 .input-search input:focus {border: none; outline: none;}
 .topbar{box-shadow: #eee 1px 1px 2px 1px;}
+
+.btn-back {
+    width: 5%;
+    cursor: pointer;
+}
+
+.input-search-nav {
+    width: 95%;
+}
 
 .search {
     align-items: center;
@@ -140,18 +149,18 @@ button {border-radius: 5px; background-color: #3f5fc7;}
     background: #e5e7fa;
     padding: 10px;
     border-radius: 5px;
-    color: #3f5fc7;
+    color: red;
     border: #eff5f7 1px solid;
 }
 
 .card-link-active {
-    background: #3f5fc7;
     padding: 10px;
-    border-radius: 5px !important;
-    color: white;
-    border: #3f5fc7 1px solid;
 }
-.card-link-active:hover { background: #2b4e8f; color: #fff; text-decoration: none;}
+
+.schedule{padding: 10px; font-size:20px}
+.check{padding: 10px; font-size:20px}
+.add{font-size:20px}
+.add:hover{color:red}
 .card-link:hover { background: #3f5fc7; color: white;}
 .tag-friends {
     background: #009238;
