@@ -5,8 +5,9 @@ $secondary-color: #4527a0;
 $secondary-light: #7953d2;
 $secondary-dark: #000070;
 $white: #fff;
-$light-gray: #f5f5f6; 
+$light-gray: #ecf0f1; 
 $md-gray: #e1e2e1;
+$gray: #bdc3c7; 
 $dark-gray: #343a40;
 
 body {
@@ -327,8 +328,7 @@ div#app {
   padding: 0 0 0 10px;
   margin: 0 auto;
   height: 50px;
-  background-color: $light-gray;
-  border-bottom: 1px solid $white;
+  background-color: $gray;
   font-weight: 300;
 }
 
@@ -354,13 +354,13 @@ div#app {
   color: $dark-gray;
 }
 #frame #sidepanel #search input::-moz-placeholder {
-  color: #475356;
+  color: $dark-gray;
 }
 #frame #sidepanel #search input:-ms-input-placeholder {
-  color: #475356;
+  color: $dark-gray;
 }
 #frame #sidepanel #search input:-moz-placeholder {
-  color: #475356;
+  color: $dark-gray;
 }
 
 // CONTATOS
@@ -444,14 +444,6 @@ div#app {
   }
 }
 
-#frame #sidepanel #contacts ul li.contact .wrap span.notification {
-  position: absolute;
-  right: 10px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #2ecc71;
-}
 
 #frame #sidepanel #contacts ul li.contact .wrap img {
   width: 40px;
@@ -463,9 +455,15 @@ div#app {
     margin-right: 0px;
   }
 }
+
 #frame #sidepanel #contacts ul li.contact .wrap .meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 0 15px;
+  width: 75%;
 }
+
 @media screen and (max-width: 735px) {
   #frame #sidepanel #contacts ul li.contact .wrap .meta {
     display: none;
@@ -476,11 +474,11 @@ div#app {
   margin-bottom: 0;
 }
 #frame #sidepanel #contacts ul li.contact .wrap .meta .preview {
-  margin-left: 50px;
-  margin-top: -20px;
-  color: #888;
+  color: $gray;
+  font-size: 0.80rem;
   padding: 0 0 1px;
   font-weight: 400;
+  margin-bottom: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -489,14 +487,20 @@ div#app {
   -webkit-transition: 1s all ease;
   transition: 1s all ease;
 }
-#frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {
-  position: initial;
-  border-radius: initial;
-  background: none;
-  border: none;
-  padding: 0 2px 0 0;
-  margin: 0 0 0 1px;
-  opacity: .5;
+
+#frame #sidepanel #contacts ul li.contact .wrap span.notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #2ecc71;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
 // CONTENT

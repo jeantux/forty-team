@@ -1,11 +1,8 @@
 <template>
     <div class="config">
-        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-        <nav class="navbar navbar-light bg-white mb-4 topbar">
-            <a v-on:click="goToPage('home')" class="menu-back navbar-brand hover"><i class="fa fa-chevron-left"></i></a>
-            <div class="navbar">
-                <a v-on:click="signOut()" href="#">Sair</a>
-            </div>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <nav class="navbar navbar-light  bg-white mb-4">
+            <i v-on:click="goToPage('home')" class="btn-back material-icons">arrow_back</i>
         </nav>
 
         <div class="configurations">
@@ -134,20 +131,26 @@ export default {
 </script>
 
 <style>
-    .title-configs {
-        border-bottom: 1px solid;
-        color: #666;
-        margin-bottom: 20px;
+    .btn-back{
+        padding: 10px 0;
+        cursor: pointer;
     }
+
+    .title-configs {
+        padding: 0 0 10px 0;
+        color: #666;
+    }
+
     .configurations {
         align-items: center;
         display: flex;
-        flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
     }
+    
     .form-data {
         width: 600px;
+    
     }
     .image {
         display: flex;
@@ -156,9 +159,11 @@ export default {
         align-items: center;
     }
     .image .image-default { 
-        display: inline;
-        border: 5px #999 solid;
+        display: inline-block;
+        border-radius: 50%;
         width: 120px;
+        height: 120px;
+        cursor: pointer;
     }
     .image small { display: inline; }
     
