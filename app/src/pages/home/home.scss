@@ -320,6 +320,21 @@ div#app {
 }
 
 @media screen and (max-width: 735px) {
+  #frame #sidepanel #profile .wrap .btns {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    bottom: 10px;
+  }
+
+  #frame #sidepanel #profile .wrap .btns i {
+    color: #320b86;
+  }
+
+  #frame #sidepanel #profile .wrap .btns i:hover {
+    color: $secondary-dark;
+  }
+
   #frame #sidepanel #search {
     display: none;
   }
