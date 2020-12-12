@@ -54,12 +54,16 @@ div#app {
   max-width: 400px;
   width: 40%;
   height: 100%;
-  background: $light-gray;
+  background: white;
   color: #475356;
   overflow: hidden;
   position: relative;
 }
 @media screen and (max-width: 735px) {
+  ul {
+    left: -53px !important;
+  }
+
   #frame #sidepanel {
     width: 58px;
     min-width: 58px;
@@ -306,7 +310,7 @@ div#app {
 }
 
 #frame #sidepanel #profile .wrap .btns i:hover{
-  color: $dark-gray;
+  color: #fff;
 }
 
 // SEARCH
@@ -328,7 +332,7 @@ div#app {
   padding: 0 0 0 10px;
   margin: 0 auto;
   height: 50px;
-  background-color: $gray;
+  background-color: #e1e2e1;
   font-weight: 300;
 }
 
@@ -344,7 +348,7 @@ div#app {
   height: 40px;
   border: none;
   background: none;
-  color: $dark-gray;
+  color: #e1e2e1;
 }
 #frame #sidepanel #search input:focus  {
   outline: none;  
@@ -414,7 +418,7 @@ div#app {
 }
 
 #frame #sidepanel #contacts ul li.contact:hover {
-  background: $md-gray;
+  background: #eee;
   color: $dark-gray;
 }
 
