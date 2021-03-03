@@ -7,8 +7,6 @@ This project has the ambition to build a chat in real time using socket.io in ja
 
 The appearance is related to several studies that I conducted where it resulted in a project with the following stacks:
 
-The project organization is based on the MVC model.
-
 **Vue.js**: Framework used in the view layer
 **Node.js**: Used to build the other two layers, Controller and Model.
 
